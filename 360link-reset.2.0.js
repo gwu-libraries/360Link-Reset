@@ -9,7 +9,9 @@ jQuery("head link").remove(); // Remove existing styles
 
 var results = ""; 
 var articleLinksdata = "";
+var chapterLinksdata = ""; //added to check for chapter links which need different labels - lsw
 var journalLinksdata = "";
+var bookLinksdata = ""; //added to check for book links which need different labels -lsw
 var dateRangedata = "";
 var DatabaseNamedata = "";
 var DatabaseLinkdata = "";
@@ -18,7 +20,7 @@ var refinerlink = jQuery("#RefinerLink0 a").attr("href");
 var hasPrint = false;
 
 // The following are special links created by Serials Solutions for us. These can guide you in adding your own
-var illiadLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('Document Delivery')").attr("href");
+var illiadLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('Interlibrary Loan')").attr("href");
 var refworksLink = jQuery("table.CandyWrapper:last a.AnchorButton:last").attr("href");
 var melLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('MeLCat')").attr("href"); // Currently not used, but we *could* use it
 
@@ -58,7 +60,7 @@ if (format === "Journal" || format === "JournalFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var journalTitleEncode = encodeURI(journalName);	
 
-var nextstepsLink = '<li>Not Available Online? <a href="' + illiadLink + '">Order a copy from Document Delivery</a></li><li>Found a problem? <a href="mailto:erms@gvsu.edu">Let our crack team of link fixers know</a>!</li>';
+var nextstepsLink = '<li>Not Available Online? <a href="' + illiadLink + '">Order a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know!</a></li>';
 
 
 
@@ -66,7 +68,7 @@ var nextstepsLink = '<li>Not Available Online? <a href="' + illiadLink + '">Orde
 
 // Books
 
-if (format === "BookFormat") {
+if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	
 	var bookTitle = jQuery("td#CitationBookTitleValue").text();
 	bookTitle = jQuery.trim(bookTitle); // Trim leading white space form book title
@@ -79,13 +81,14 @@ if (format === "BookFormat") {
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
 
 	var citationDiv = '<span id="CitationBookAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationBookDateValue">(' + bookDate + ')</span>.&nbsp; <span id="CitationBookTitleValue"><em>' + bookTitle + '</em></span>' + bookisbn;
-	
-	// Replace the final table with semantic HTML, along with the dynamic links
+
 
 	
+	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
-var nextstepsLink = '<li><a href="http://library.catalog.gvsu.edu/search/t' + bookTitleLink + '">Search the GVSU Catalog for this book</a></li><li><a href="' + melLink + '">Order from another Michigan library</a></li><li>Not Available Online? <a href="' + illiadLink + '">Order a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="mailto:erms@gvsu.edu">Let our crack team of link fixers know</a>!</li>';
+
+var nextstepsLink = '<li><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">Search the Catalog for this book</a></li><li>Not Available Online? <a href="' + illiadLink + '">Order a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know!</a></li>';
 	
 }
 
@@ -134,7 +137,7 @@ jQuery("table#JournalLinkTable").find("tr").each(function(index) { // Grab value
 			
 		}
 		
-		// Get the journal link, if available
+		// Get the journal or book link, if available
 		
 		if(jQuery(this).find("#JournalCL a").length > 0) { // There is a journal link
 
@@ -172,10 +175,73 @@ jQuery("table#JournalLinkTable").find("tr").each(function(index) { // Grab value
 		
 });
 
+// checking for Book table with chapter and book-level links -lsw
+// Get information about displayed results and build results list
+
+jQuery("table#BookLinkTable").find("tr").each(function(index) { // Grab values from the results table
+
+        if(index !== 0) {
+
+                // Get the chapter link, if available
+
+                if(jQuery(this).find("#ArticleCL a").length > 0) { // There is a chapter link -lsw
+
+                        var newHref = jQuery(this).find("#ArticleCL a").attr("href");
+
+                        chapterLinksdata = chapterLinksdata + newHref + "|||";
+
+                } else { // No article length
+
+                        chapterLinksdata = chapterLinksdata + "NA|||";
+
+                }
+
+                // Get the journal or book link, if available
+
+                if(jQuery(this).find("#BookCL a").length > 0) { // There is a book link -lsw
+
+                        var newHref = jQuery(this).find("#BookCL a").attr("href");
+
+                        bookLinksdata = bookLinksdata + newHref + "|||";
+
+                } else { // No article length
+
+                        bookLinksdata = bookLinksdata + "NA|||";
+
+                }
+
+                // Get the date range
+
+                var newDates = jQuery(this).find("#DateCL").text();
+
+                dateRangedata = dateRangedata + newDates + "|||";
+
+                // Get the database name
+
+                var newDBName = jQuery(this).find("#DatabaseCL").text();
+
+                DatabaseNamedata = DatabaseNamedata + newDBName + "|||";
+
+                // Get the database link
+
+                var newDBLink = jQuery(this).find("#DatabaseCL a").attr("href");
+
+                DatabaseLinkdata = DatabaseLinkdata + newDBLink + "|||";
+
+        }
+
+        results = index; // Get total number of results
+
+});
+ 
+
+
 // Bust apart arrays into variabls we can call
 
 var articleLinks = articleLinksdata.split("|||");
+var chapterLinks = chapterLinksdata.split("|||"); //added chapter links -lsw
 var journalLinks = journalLinksdata.split("|||");
+var bookLinks = bookLinksdata.split("|||"); //added book links -lsw
 var dateRange = dateRangedata.split("|||");
 var DatabaseNames = DatabaseNamedata.split("|||");
 var DatabaseLinks = DatabaseLinkdata.split("|||");
@@ -184,23 +250,34 @@ var additionalLinksnum = results - 1; // Number of links in the additional resul
 
 if((articleLinks[0] === "NA") && (journalLinks[0] !== "NA")) { // There was no article link, but there is a journal link
 	
-TopDatabaseName = jQuery.trim(DatabaseNames[0]);
+	TopDatabaseName = jQuery.trim(DatabaseNames[0]);
 	
-// Check to see if top result is a print journal
+	// Check to see if top result is a print journal
 
-if(TopDatabaseName === "Print at GVSU Libraries") {
+	if(TopDatabaseName === "Library Print Journals") {
 	
-var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Find a Copy</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
-var hasPrint = true;	
-} else {
+	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Find a Copy</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
+	var hasPrint = true;	
+	} else {
 
-var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Browse the Journal Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Browse the Journal Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
 
-}} else { // There is an article link
+	} 
+
+} else  if (articleLinks[0] !== "NA") { // There is an article link
 		
 var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gvsu.edu/icon/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
 	
-}
+} else { // a book link remains - lsw 
+
+	if (chapterLinks[0] === "NA") { //there is a chapter link
+ 	var topResultdiv = '<ul id="top-result"><li><a href="' + bookLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
+	 } else { // book level link 
+
+	var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gvsu.edu/icon/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
+
+
+}}
 
 
 // Additional results
@@ -239,7 +316,7 @@ if(articleLinks[i] !== "NA") { // Article link - article has to be online
 	// Check to see if it is available in print only and save it as a separate variable to be broken out in another list
 	
 	
-	if(jQuery.trim(DatabaseNames[i]) === "Print at GVSU Libraries") { // Item is in print
+	if(jQuery.trim(DatabaseNames[i]) === "Library Print Journals") { // Item is in print; changed for GWU -lsw
 		var hasPrint = true;
 		if(printAdditionalResults === "") { // First online article listed, add the header
 
@@ -248,7 +325,7 @@ if(articleLinks[i] !== "NA") { // Article link - article has to be online
 
 		}
 		
-		printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="Grand Valley State University">GVSU</abbr> University Libraries</li>';
+		printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries</li>';
 		
 	} else { // Item is online
 		
@@ -291,7 +368,7 @@ var Resultdiv = topResultdiv;
 
 if(results === "") { // Item is not available online or in print
 	
-	var Resultdiv = '<div id="ContentNotAvailableTable"><p class="lib-big-text">We&#8217;re sorry, but this item is not available online.</p><p>Think this is an error? Let our eResources team know at <a href="mailto:erms@gvsu.edu">erms@gvsu.edu</a>.</p></div>';
+	var Resultdiv = '<div id="ContentNotAvailableTable"><p class="lib-big-text">We&#8217;re sorry, but this item is not available online.</p><p>Think this is an error? Let our e-resources team know at <a href="mailto:gwlib-eresources@groups.gwu.edu">gwlib-eresources@groups.gwu.edu</a>.</p></div>';
 	
 
 }
@@ -375,7 +452,7 @@ jQuery("#next-step ul").append('<li class="doc-del-tooltip">Having trouble? You 
 jQuery(".doc-del-tooltip").hide();
 
 // Now let's count clicks
-
+/*
 jQuery("#360link-reset ul li a").click(function() {
 	
 	clicks = clicks + 1;
@@ -400,6 +477,31 @@ jQuery("#360link-reset ul li a").click(function() {
 		
 	}
 	
-});
+}); */
 
 });
+
+// copied and added by lsw. was in GVSUs SerSol footer configuration box instead of in this file.
+ 
+jQuery(document).ready(function() {
+
+	jQuery("#summon-search-box label").hide(); // Hide labels if JS is available, since placeholders will show labels for form elements
+
+
+
+	jQuery(".event-body").hide(); 
+	// Use jQuery instead of $ to avoid conflict with prototype, loaded by SS
+
+	jQuery(".event-head").click(function() {
+		jQuery(".event-body").slideToggle(400);
+		var current_text = jQuery(".event-head").text();
+		if(current_text === "Hide Additional Results") {
+		  jQuery(".event-head").text('Show More Results');
+		  } else {
+		  jQuery(".event-head").text('Hide Additional Results');
+		  }
+	});
+
+	jQuery(".holding-details").tooltip({effect: 'slide',offset:[0,0]});
+});
+
