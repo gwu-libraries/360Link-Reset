@@ -60,7 +60,7 @@ if (format === "Journal" || format === "JournalFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var journalTitleEncode = encodeURI(journalName);	
 
-var nextstepsLink = '<li>Not Available Online? <a href="' + illiadLink + '">Order a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know!</a></li>';
+var nextstepsLink = '<li>Not Available Anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know!</a></li>';
 
 
 
@@ -88,7 +88,7 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">Search the Catalog for this book</a></li><li>Not Available Online? <a href="' + illiadLink + '">Order a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know!</a></li>';
+var nextstepsLink = '<li><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">Search the Catalog for this book</a></li><li>Not Available Online? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know!</a></li>';
 	
 }
 
@@ -113,7 +113,8 @@ if (format === "UnknownFormat") {
 	
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
-var nextstepsLink = '<li><a href="http://library.catalog.gvsu.edu/search/t' + bookTitleLink + '">Search the GVSU Catalog for this book</a></li><li>Not Available Online? <a href="' + illiadLink + '">Order a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="mailto:erms@gvsu.edu">Let our crack team of link fixers know</a>!</li>';
+
+var nextstepsLink = '<li><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=a' + bookTitleLink + '">Search the Catalog for this book</a></li><li>Not Available Anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know</a>!</li>';
 	
 }
 
@@ -439,7 +440,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 
 //check and see if there are print holdings.  if not, show a "search the catlog" link
 
-if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement"><a href="http://library.catalog.gvsu.edu/search/s' + journalTitleEncode + '">Search the Library Catalog for this journal</a></li>' + nextstepsLink;};
+if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement"><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + journalTitleEncode + '">Search the Library Catalog for this journal</a></li>' + nextstepsLink;};
 
 jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 6em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gvsu.edu/icon/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div></div><div class="clear"></div><!-- Begin Custom GVSU Footer code --></div>');
 
