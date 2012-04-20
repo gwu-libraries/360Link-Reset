@@ -26,13 +26,12 @@ var melLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('MeLCat')"
 
 // Build the citation
 
-var authorName = jQuery("span.fn").text();
-authorName = jQuery.trim(authorName); // Trim leading white space form author name
-
 // Journals
 
 if (format === "Journal" || format === "JournalFormat") {
 
+	var authorName = jQuery("td#CitationJournalAuthorValue").text();
+	authorName = jQuery.trim(authorName); //Trim leading white space from author name	
 	var journalName = jQuery("td#CitationJournalTitleValue").text();
 	journalName = jQuery.trim(journalName); // Trim leading white space form journal name
 	var articleName = jQuery("td#CitationJournalArticleValue").text();
@@ -41,10 +40,10 @@ if (format === "Journal" || format === "JournalFormat") {
 	journalVol = jQuery.trim(journalVol); // Trim leading white space form journal volume
 	if (journalVol !== "") { journalVol = ', <span id="CitationJournalVolumeValue">&nbsp;' + journalVol + '</span>'; } // Add context so if var is blank, it won't display
 	var journalIssue = jQuery("td#CitationJournalIssueValue").text();
-	journalIssue = jQuery.trim(journalIssue); // Trim leading white space form journal issue #
+	journalIssue = jQuery.trim(journalIssue); // Trim leading white space form journal issue 
 	if (journalIssue !== "") {journalIssue = '<span id="CitationJournalIssueValue">&nbsp;(' + journalIssue + '),</span>'; } // Add context so if var is blank, it won't display
 	var journalDate = jQuery("td#CitationJournalDateValue").text();
-	journalDate = jQuery.trim(journalDate); // Trim leading white space form journal date
+	if (journalDate !== "") {journalDate = '(' + jQuery.trim(journalDate) + ')' }; // Avoid empty (), Trim leading white space form journal date
 	var journalPages = jQuery("td#CitationJournalPageValue").text();
 	journalPages = jQuery.trim(journalPages); // Trim leading white space form journal pages
 	if (journalPages !== "") {journalPages = '<span id="CitationJournalPageValue">&nbsp;p. ' + journalPages + '.</span>'; } // Add context so if var is blank, it won't display
@@ -54,7 +53,7 @@ if (format === "Journal" || format === "JournalFormat") {
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
 
-	var citationDiv = '<span id="CitationJournalAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationJournalDateValue">(' + journalDate + ')</span>.&nbsp; <span id="CitationJournalArticleValue">' + articleName + '.</span>&nbsp; <span id="CitationJournalTitleValue">' + journalName + '.</span>&nbsp;' + journalVol +  journalIssue + journalPages;
+	var citationDiv = '<span id="CitationJournalAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationJournalDateValue">' + journalDate + '</span>.&nbsp; <span id="CitationJournalArticleValue">' + articleName + '.</span>&nbsp; <span id="CitationJournalTitleValue">' + journalName + '.</span>&nbsp;' + journalVol +  journalIssue + journalPages;
 
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
@@ -70,6 +69,8 @@ var nextstepsLink = '<li>Not Available Anywhere? <a href="' + illiadLink + '">Or
 
 if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	
+	var authorName = jQuery("td#CitationBookAuthorValue").text();
+        authorName = jQuery.trim(authorName); //Trim leading white space from author name     
 	var bookTitle = jQuery("td#CitationBookTitleValue").text();
 	bookTitle = jQuery.trim(bookTitle); // Trim leading white space form book title
 	var bookDate = jQuery("td#CitationBookDateValue").text();
@@ -267,7 +268,7 @@ if((articleLinks[0] === "NA") && (journalLinks[0] !== "NA")) { // There was no a
 
 } else  if (articleLinks[0] !== "NA") { // There is an article link
 		
-var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gvsu.edu/icon/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
+var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
 	
 } else { // a book link remains - lsw 
 
@@ -275,7 +276,7 @@ var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" cl
  	var topResultdiv = '<ul id="top-result"><li><a href="' + bookLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
 	 } else { // book level link 
 
-	var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gvsu.edu/icon/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
 
 
 }}
@@ -309,7 +310,7 @@ if(articleLinks[i] !== "NA") { // Article link - article has to be online
 		
 	}
 	
-	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + articleLinks[i] + '" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[i] + '" class="SS_DatabaseHyperLink">' + DatabaseNames[i] + '</a><a class="holding-details"><img src="http://gvsu.edu/icon/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[i] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
+	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + articleLinks[i] + '" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[i] + '" class="SS_DatabaseHyperLink">' + DatabaseNames[i] + '</a><a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[i] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
 	
 	
 } else { // No article link
@@ -336,7 +337,7 @@ if(articleLinks[i] !== "NA") { // Article link - article has to be online
 
 		}
 		
-		onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Browse the Journal Online</a> in <a href="' + DatabaseLinks[i] + '" class="SS_DatabaseHyperLink">' + DatabaseNames[i] + '</a><a class="holding-details"><img src="http://gvsu.edu/icon/help.png" alt="" /></a><div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
+		onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Browse the Journal Online</a> in <a href="' + DatabaseLinks[i] + '" class="SS_DatabaseHyperLink">' + DatabaseNames[i] + '</a><a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
 		
 	}
 }
@@ -442,7 +443,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 
 if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement"><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + journalTitleEncode + '">Search the Library Catalog for this journal</a></li>' + nextstepsLink;};
 
-jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 6em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gvsu.edu/icon/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div></div><div class="clear"></div><!-- Begin Custom GVSU Footer code --></div>');
+jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 6em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div></div><div class="clear"></div><!-- Begin Custom GVSU Footer code --></div>');
 
 }
 
