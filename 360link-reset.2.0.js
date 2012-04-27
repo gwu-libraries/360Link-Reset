@@ -21,7 +21,7 @@ var hasPrint = false;
 
 // The following are special links created by Serials Solutions for us. These can guide you in adding your own
 var illiadLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('Interlibrary Loan')").attr("href");
-var refworksLink = jQuery("table.CandyWrapper:last a.AnchorButton:last").attr("href");
+var refworksLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('RefWorks')").attr("href");
 var melLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('MeLCat')").attr("href"); // Currently not used, but we *could* use it
 
 // Build the citation
@@ -428,6 +428,11 @@ var Resultdiv = topResultdiv + '</ul>';
 	
 }
 
+//create link to Google Form for library staff testing
+ 
+var openUrl = escape(location.href);	
+var formLink = 'http://spreadsheets.google.com/viewform?formkey=dGM5aFpqX2V2d0NNU1VQcFc0TVhIRFE6MQ&entry_0=' + openUrl;
+
 
 // Do the magic if this is a link resolver display page:
 // Rewrite Serials Solutions terrible page with a nice semantic, clean div full of easy-to-follow markup
@@ -443,8 +448,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 
 if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement"><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + journalTitleEncode + '">Search the Library Catalog for this journal</a></li>' + nextstepsLink;};
 
-jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 6em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div></div><div class="clear"></div><!-- Begin Custom GVSU Footer code --></div>');
-
+jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 6em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div></div><div class="clear"></div><!-- Begin Custom GWU Footer code --><div id="footer"><p>Use of most electronic resources at the George Washington University is limited to current students, staff, and faculty, and is subject to limitations (<a href="http://www.gelman.gwu.edu/search-1/appropriate-use-of-electronic-resources">read more</a>). Library staff <a href="' + formLink + '" target="_blank">report a problem.</a></p></div></div>');
 }
 
 // Let's show a tooltip highlighting Document Delivery when the user has tried a few sources.
