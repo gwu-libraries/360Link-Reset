@@ -28,7 +28,7 @@ var melLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('MeLCat')"
 
 // Journals
 
-if (format === "Journal" || format === "JournalFormat") {
+if (format === "Journal" || format === "JournalFormat") {  // format variable set by SerSol script at beginning of body tag
 
 	var authorName = jQuery("td#CitationJournalAuthorValue").text();
 	authorName = jQuery.trim(authorName); //Trim leading white space from author name	
@@ -59,7 +59,7 @@ if (format === "Journal" || format === "JournalFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var journalTitleEncode = encodeURI(journalName);	
 
-var nextstepsLink = '<li>Not Available Anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know!</a></li>';
+var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let the library know.</a></li>';
 
 
 
@@ -87,9 +87,9 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
-var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
+	var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">Search the Catalog for this book</a></li><li>Not Available Online? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know!</a></li>';
+	var nextstepsLink = '<li><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">Search the Catalog for this book</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let the library know.</a></li>';
 	
 }
 
@@ -115,7 +115,7 @@ if (format === "UnknownFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=a' + bookTitleLink + '">Search the Catalog for this book</a></li><li>Not Available Anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let our team of link fixers know</a>!</li>';
+var nextstepsLink = '<li><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=a' + bookTitleLink + '">Search the Catalog for this book</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let the library know.</a></li>';
 	
 }
 
@@ -250,7 +250,7 @@ var DatabaseLinks = DatabaseLinkdata.split("|||");
 
 var additionalLinksnum = results - 1; // Number of links in the additional results list
 
-if((articleLinks[0] === "NA") && (journalLinks[0] !== "NA")) { // There was no article link, but there is a journal link
+if((format === "Journal" || format === "JournalFormat" || format === "Unknown") && (articleLinks[0] === "NA") && (journalLinks[0] !== "NA")) { //  this is a journal, there was no article link, but there is a journal link
 	
 	TopDatabaseName = jQuery.trim(DatabaseNames[0]);
 	
@@ -266,17 +266,17 @@ if((articleLinks[0] === "NA") && (journalLinks[0] !== "NA")) { // There was no a
 
 	} 
 
-} else  if (articleLinks[0] !== "NA") { // There is an article link
+} else  if ((articleLinks[0] !== "NA")  && (format === "Journal" || format === "JournalFormat" || format === "Unknown")) { // There is an article link
 		
 var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
 	
 } else { // a book link remains - lsw 
 
-	if (chapterLinks[0] === "NA") { //there is a chapter link
- 	var topResultdiv = '<ul id="top-result"><li><a href="' + bookLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
+	if (chapterLinks[0] !== "NA") { //there is a chapter link
+ 	var topResultdiv = '<ul id="top-result"><li><a href="' + chapterLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
 	 } else { // book level link 
 
-	var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + bookLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
 
 
 }}
@@ -370,7 +370,7 @@ var Resultdiv = topResultdiv;
 
 if(results === "") { // Item is not available online or in print
 	
-	var Resultdiv = '<div id="ContentNotAvailableTable"><p class="lib-big-text">We&#8217;re sorry, but this item is not available online.</p><p>Think this is an error? Let our e-resources team know at <a href="mailto:gwlib-eresources@groups.gwu.edu">gwlib-eresources@groups.gwu.edu</a>.</p></div>';
+	var Resultdiv = '<div id="ContentNotAvailableTable"><p class="lib-big-text">We&#8217;re sorry, but this item is not available online.</p><p>Think this is an error? Let the library know at <a href="mailto:gwlib-eresources@groups.gwu.edu">gwlib-eresources@groups.gwu.edu</a>.</p></div>';
 	
 
 }
@@ -446,10 +446,14 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 
 //check and see if there are print holdings.  if not, show a "search the catlog" link
 
-if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement"><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + journalTitleEncode + '">Search the Library Catalog for this journal</a></li>' + nextstepsLink;};
+	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement"><a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + journalTitleEncode + '">Search the Library Catalog for this journal</a></li>' + nextstepsLink;};
 
-jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 6em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div></div><div class="clear"></div><!-- Begin Custom GWU Footer code --><div id="footer"><p>Use of most electronic resources at the George Washington University is limited to current students, staff, and faculty, and is subject to limitations (<a href="http://www.gelman.gwu.edu/search-1/appropriate-use-of-electronic-resources">read more</a>). Library staff <a href="' + formLink + '" target="_blank">report a problem.</a></p></div></div>');
+	jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 6em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div></div><div class="clear"></div><!-- Begin Custom GWU Footer code --><div id="footer"><p>Use of most electronic resources at the George Washington University is limited to current students, staff, and faculty, and is subject to limitations (<a href="http://www.gelman.gwu.edu/search-1/appropriate-use-of-electronic-resources">read more</a>). Library staff <a href="' + formLink + '" target="_blank">report a problem.</a></p></div></div>');
+
 }
+
+
+
 
 // Let's show a tooltip highlighting Document Delivery when the user has tried a few sources.
 // First, let's add the code for the tooltip:
@@ -485,11 +489,12 @@ jQuery("#360link-reset ul li a").click(function() {
 	
 }); */
 
-});
+// temporarily commetinging outn 
+//});
 
 // copied and added by lsw. was in GVSUs SerSol footer configuration box instead of in this file.
  
-jQuery(document).ready(function() {
+//jQuery(document).ready(function() {
 
 	jQuery("#summon-search-box label").hide(); // Hide labels if JS is available, since placeholders will show labels for form elements
 

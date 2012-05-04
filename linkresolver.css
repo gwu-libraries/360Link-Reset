@@ -131,7 +131,7 @@ a.article-button {
 
 div#ArticleCL a,
 a.article-button {
-	background: #; 
+	background: #0090D2; 
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(.2, #52a8e8), color-stop(1, #2e76cf)); 
 	background: -moz-linear-gradient(center top, #52a8e8 20%, #2e76cf 100%); 
 	border: 1px solid #4081af; 
@@ -302,11 +302,18 @@ a.holding-details {
         line-height: 16px;
         }
 #footer a {
-	text decoration: none;
 	font-size: 12px;
         font-family: Arial, sans-serif;
         color: #666666;
         line-height: 16px;
 	}
 
+/* Journals Portal not used yet */
+#journalList {
+	padding-left: 6em;
+	}
+#journalList a tr td li {
+	font-size: 12px;
+        font-family: Arial, sans-serif;
+	}
 
