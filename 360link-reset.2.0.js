@@ -276,7 +276,7 @@ var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" cl
  	var topResultdiv = '<ul id="top-result"><li><a href="' + chapterLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
 	 } else { // book level link 
 
-	var topResultdiv = '<ul id="top-result"><li><a href="' + bookLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + bookLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
 
 
 }}
@@ -513,6 +513,9 @@ jQuery("#360link-reset ul li a").click(function() {
 		  }
 	});
 
+	if (format === "Journal" || format === "JournalFormat") {
 	jQuery(".holding-details").tooltip({effect: 'slide',offset:[0,0]});
+	};
+
 });
 
