@@ -51,13 +51,11 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	var journalissn = jQuery("td#CitationJournalIssnValue").text();
 	journalissn = jQuery.trim(journalissn); // Trim leading white space form journal issn
         if (journalissn !== "") {  //get best search param for catalog search 
-                var searchBy = "&FLD1=ISSN+(ISSN)&SAB1=" + journalissn;
+                var searchURL = "http://findit.library.gwu.edu/item/?issn=" + journalissn;
                 journalissn = '<span id="CitationJournalIssnValue">&nbsp;(ISSN:&nbsp;' + journalissn + ')</span>'; } // Add context to citation so if var is blank it will not display
                 else {
-                searchBy = "&FLD1=JALL+(JALL)&SAB1=" + journalTitleEncode;
+                searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=JALL+(JALL)&SAB1=" + journalTitleEncode;
                 }
-        var baseURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase";
-
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
 
@@ -66,7 +64,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
+var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
 
 
 
@@ -87,13 +85,12 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	bookisbn = jQuery.trim(bookisbn); // Trim leading white space form journal name
 	if (bookisbn !== "") {  //get best search param for catalog search 
 		var searchIsbns = bookisbn.split(", ");
-		var searchBy = searchIsbns[0].replace(/-/g,"");
-		searchBy = "&BOOL1=as+a+phrase&FLD1=ISBN+(ISBN)&SAB1=" + searchBy;
+		var firstISBN = searchIsbns[0].replace(/-/g,"");
+		searchURL = "http://findit.library.gwu.edu/item/?isbn=" + firstISBN;
 		bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
 		else {
-		searchBy = "&Search_Arg=" + bookTitleLink + "&Search_Code=TALL";
+		searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=Local&CNT=25&HIST=1&Search_Arg=" + bookTitleLink + "&Search_Code=TALL";
 		} 
-	var baseURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=Local&CNT=25&HIST=1";	
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
 
@@ -104,7 +101,7 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-	var nextstepsLink = '<li>Look for a copy nearby: <a href="' + baseURL + searchBy + '">Search the library catalog</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
+	var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
 	
 }
 
@@ -130,7 +127,7 @@ if (format === "UnknownFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=a' + bookTitleLink + '">Search the library catalog</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Order a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
+var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=a' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
 	
 }
 
@@ -461,7 +458,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 
 //check and see if there are print holdings.  if not, show a "search the catlog" link
 
-	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + baseURL + searchBy + '">Search the library catalog for this journal</a></li>' + nextstepsLink;};
+	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li>' + nextstepsLink;};
 
 	jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 1em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --><div id="footer"><p>Use of most electronic resources at the George Washington University is limited to current students, staff, and faculty, and is subject to limitations (<a href="http://www.gelman.gwu.edu/search-1/appropriate-use-of-electronic-resources">read more</a>). Library staff <a href="' + formLink + '" target="_blank">report a problem.</a></p></div></div>');
 
