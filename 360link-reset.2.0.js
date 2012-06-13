@@ -31,12 +31,17 @@ var melLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('MeLCat')"
 if (format === "Journal" || format === "JournalFormat") {  // format variable set by SerSol script at beginning of body tag
 
 	var authorName = jQuery("td#CitationJournalAuthorValue").text();
-	authorName = jQuery.trim(authorName); //Trim leading white space from author name	
+	authorName = jQuery.trim(authorName);  //Trim leading white space from author name
+	if (authorName !== "") {
+		authorName = authorName + "&nbsp;";
+		}
+ //Trim leading white space from author name	
 	var journalName = jQuery("td#CitationJournalTitleValue").text();
 	journalName = jQuery.trim(journalName); // Trim leading white space form journal name
 	var journalTitleEncode = encodeURI(journalName);
-	var articleName = jQuery("td#CitationJournalArticleValue").text();
-	articleName = jQuery.trim(articleName) + '.&nbsp;'; // Trim leading white space form article name, add period
+	var articleName = jQuery("td#CitationJournalArticleValue").text();	
+	if (articleName !== "") { articleName = jQuery.trim(articleName) + '.'; } // Trim leading white space form article name, add period
+		
 	var journalVol = jQuery("td#CitationJournalVolumeValue").text();
 	journalVol = jQuery.trim(journalVol); // Trim leading white space form journal volume
 	if (journalVol !== "") { journalVol = ', <span id="CitationJournalVolumeValue">&nbsp;' + journalVol + '</span>'; } // Add context so if var is blank, it won't display
@@ -81,6 +86,9 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 	var bookDate = jQuery("td#CitationBookDateValue").text();
 	bookDate = jQuery.trim(bookDate); // Trim leading white space form journal name
+	if (bookDate != "") {
+		bookDate = '(' + bookDate + ')';
+		}
 	var bookisbn = jQuery("td#CitationBookISBNValue").text();
 	bookisbn = jQuery.trim(bookisbn); // Trim leading white space form journal name
 	if (bookisbn !== "") {  //get best search param for catalog search 
@@ -94,7 +102,7 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
 
-	var citationDiv = '<span id="CitationBookAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationBookDateValue">(' + bookDate + ')</span>.&nbsp; <span id="CitationBookTitleValue"><em>' + bookTitle + '</em></span>' + bookisbn;
+	var citationDiv = '<span id="CitationBookAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationBookDateValue">' + bookDate + '</span>.&nbsp; <span id="CitationBookTitleValue"><em>' + bookTitle + '</em></span>' + bookisbn;
 
 
 	
@@ -119,7 +127,7 @@ if (format === "UnknownFormat") {
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
 
-	var citationDiv = '<span id="CitationBookAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationBookDateValue">(' + bookDate + ')</span>.&nbsp; <span id="CitationBookTitleValue"><em>' + bookTitle + '</em></span>&nbsp; <span id="CitationBookISBNValue">&nbsp; </span>';
+	var citationDiv = '<span id="CitationBookAuthorValue">' + authorName + '</span><span id="CitationBookDateValue">(' + bookDate + ')</span>.&nbsp; <span id="CitationBookTitleValue"><em>' + bookTitle + '</em></span>&nbsp; <span id="CitationBookISBNValue">&nbsp; </span>';
 	
 	// Replace the final table with semantic HTML, along with the dynamic links
 
@@ -460,7 +468,8 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 
 	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li>' + nextstepsLink;};
 
-	jQuery("#360link-reset").html('<div id="page-content" style="margin: 0; padding-left: 1em; width:85%;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --><div id="footer"><p>Use of most electronic resources at the George Washington University is limited to current students, staff, and faculty, and is subject to limitations (<a href="http://www.gelman.gwu.edu/search-1/appropriate-use-of-electronic-resources">read more</a>). Library staff <a href="' + formLink + '" target="_blank">report a problem.</a></p></div></div>');
+
+	jQuery("#360link-reset").html('<div id="page-content" style="margin: 0 auto 0; max-width:940px; min-height: 600px;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --><!-- <div id="footer"><p>Use of most electronic resources at the George Washington University is limited to current students, staff, and faculty, and is subject to limitations (<a href="http://www.gelman.gwu.edu/search-1/appropriate-use-of-electronic-resources">read more</a>). Library staff <a href="' + formLink + '" target="_blank">report a problem.</a></p></div> --></div>');
 
 }
 

@@ -5,9 +5,9 @@
 
 /* Libraries site styles */
 
-html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; height: 100%; }
 
-body { margin: 0; font-size: 100%; font-family: Arial, sans-serif; line-height: 1.231; }
+body { margin: 0; font-size: 100%; font-family: Arial, sans-serif; line-height: 1.231; height: 100%;}
 
 p, li {
 	line-height: 1.125em; /* 18px; */
@@ -51,7 +51,12 @@ img, object, embed {
   max-width: 100%;
   height: auto;
   object-fit: contain;
-} 
+}  
+#main-container {
+	position: relative;
+	min-height: 100%;
+	margin-bottom: -300px;
+	}
 
 #libheader-container {
 	width:100%; 
@@ -104,6 +109,13 @@ img, object, embed {
 #libfooter a {color:#fff; text-decoration:none;}
 #libfooter a:visited {color:#fff;}
 #libfooter a:hover {color:#fff; text-decoration:underline;} 
+
+
+#full-footer-container {
+	width: 100%;
+	height: 300px;
+	position: relative;
+	}
 
 /* responsive class to drop the gw logo when window is under 700px  */
 .hide-lo {
@@ -193,9 +205,9 @@ a.article-button {
 
 div#ArticleCL a,
 a.article-button {
-	background: #03314B; /* #0090D2; */ 
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(.2, #005481 /*#52a8e8 */ ), color-stop(1, #03314B /* #2e76cf */)); 
-	background: -moz-linear-gradient(center top, #005481 /*#52a8e8 */ 20%, #03314B /* #2e76cf */ 100%); 
+	background: #03314B;  
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(.2, #1F65A0 ), color-stop(1, #03314B )); 
+	background: -moz-linear-gradient(center top, #1F65A0 /*#52a8e8 */ 20%, #03314B /* #2e76cf */ 100%); 
 	border: 1px solid #4081af; 
 	border-bottom-color: #20559a; 
 	color: white; 
@@ -271,7 +283,7 @@ p.lib-big-text {
 	
 #citation {
 	line-height: 1.5em;
-	font-size: .814em !important; /* changed from 1.4em  -lsw*/
+	font-size: .814em !important; 
 	margin-bottom: 1em;
 	color: #555;
 	}
@@ -323,7 +335,7 @@ a.holding-details {
 	margin: .8em 0; }
 
 .event-body ul li {
-	font-size: 1.1em; 
+	font-size: 1em; 
 	margin-bottom: .8em;
 	font-weight: normal; }
 
@@ -356,11 +368,16 @@ a.holding-details {
 
 
 /* Custom footer code */
-
+ 
+.clear {
+	height: 300px;
+	clear: both;
+	}
 #footer {
- /*       margin: 20px auto; */
-	margin-top: 50px;
-	margin-bottom: 10px;
+	margin: 0 auto 0;
+/* 	margin-top: 50px;
+	margin-bottom: 10px; */
+	max-width: 940px;
         }
 #footer p {
         font-size: 12px;
@@ -375,12 +392,55 @@ a.holding-details {
         line-height: 16px;
 	}
 
-/* Journals Portal not used yet */
+/* Journal List */
 #journalList {
-	padding-left: 6em;
 	}
 #journalList a tr td li {
-	font-size: 12px;
+	font-size: 1em;
         font-family: Arial, sans-serif;
 	}
+.SS_LetterLinks {
+	font-size: .814em;
+	}
+.SS_Holding {
+	font-size: .814em;
+        font-family: Arial, sans-serif;
+	/* max-width: 400px; */
+        }
+.SS_Holding table {
+	display:table;
+	}
+.SS_EJPPreContentHorizontalRules {
+	display:none; /* hide hr around search box */
+	}
 
+.SS_SkipNavigationLinks {
+	font-size: .725em; }
+
+.SS_CopyRightStatement {
+	display: none; /* hide Serials Solutions copyright */ 
+	}
+
+.SS_ResultsNoteGroup {
+        font-size: .814em; 
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+	
+	}
+.SS_SearchResultsCount {
+	display:none; /* hide "Search titles 1 - x of x */
+	}
+
+.SS_EJPTermsOfUse {
+	display: none; /* hide terms of use links */
+	}
+
+.SSEJPLinkToTop {
+	font-size: .725em;
+	}
+.SS_HorizontalRules {
+	display: none; /* hide hr's at bottom of page above footer */
+	}
+.SS_SearchToolsGroup {
+	margin: 10px 0px 20px 0px;
+	}
