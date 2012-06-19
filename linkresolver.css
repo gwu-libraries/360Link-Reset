@@ -175,53 +175,68 @@ td#CitationJournalIssnValue, td#CitationJournalVolumeValue {
 	margin: 1em 0; }
 
 a#refworks {
-	display: inline-block;
-	padding-top: 20px;
+/*	display: inline-block;
+ 	padding-top: 20px;
 	border: 0;
 	height: 0;
 	width: 102px;
-	background: transparent url(refworks-logo.gif) top left no-repeat;
+	background: transparent url(refworks-logo.gif) top left no-repeat; 
 	position: relative;
 	top: 4px;
-	left: 10px;
+	left: 10px; */ 
+	color: #1F65A0;
 	overflow: hidden; }
 
 div#ArticleCL a,
 div#JournalCL a,
 a.article-button {
-	display: inline-block;
-	padding: 6px 15px; 
-	text-align: center; 
-	text-decoration: none; 
-	-webkit-border-radius: 4px; 
-	-moz-border-radius: 4px; 
-	khtml-border-radius: 4px; 
-	border-radius: 4px;
-	-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 0 2px rgba(255,255,255,.3), 0 1px 2px rgba(0,0,0,.29); 
-	-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 0 2px rgba(255,255,255,.3), 0 1px 2px rgba(0,0,0,.29); 
-	box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 0 2px rgba(255,255,255,.3), 0 1px 2px rgba(0,0,0,.29); }
-
+    border-color: #4081AF #4081AF #20559A;
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 0 2px rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.29);
+    text-decoration: none;
+    font-size: 1em;
+    padding: .3em .4em;
+    background: -moz-linear-gradient(center top , #1F65A0 20%, #4282B1 100%); /* mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #1F65A0), color-stop(100%, #4282B1)); /* Safari 4+, Chrome 2+ */     
+    background: -o-linear-gradient(#1F65A0, #4282B1); /* Opera 11.10 */ 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1'); /* IE6 & IE7 */ 
+    ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1')"; /* IE8+ */ 
+    background: linear-gradient(#1F65A0, #4282B1); /* the standard */
+    -moz-border-radius: .4em;
+    -webkit-border-radius: .4em;
+    border-radius: .4em; }
 	
 
 div#ArticleCL a,
 a.article-button {
-	background: #03314B;  
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(.2, #1F65A0 ), color-stop(1, #03314B )); 
-	background: -moz-linear-gradient(center top, #1F65A0 /*#52a8e8 */ 20%, #03314B /* #2e76cf */ 100%); 
-	border: 1px solid #4081af; 
-	border-bottom-color: #20559a; 
-	color: white; 
-	margin: 0;
-	text-shadow: 0 -1px 0 rgba(0,0,0,.3); }
+    border-color: #4081AF #4081AF #20559A;
+    border-style: solid;
+    border-width: 1px;
+    color: white;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 0 2px rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.29);
+    text-decoration: none;
+    font-size: 1em;
+    padding: .3em .4em;
+    background: -moz-linear-gradient(center top , #1F65A0 20%, #4282B1 100%); /* mozilla */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #1F65A0), color-stop(100%, #4282B1)); /* Safari 4+, Chrome 2+ */     
+    background: -o-linear-gradient(#1F65A0, #4282B1); /* Opera 11.10 */ 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1'); /* IE6 & IE7 */ 
+    ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1')"; /* IE8+ */ 
+    background: linear-gradient(#1F65A0, #4282B1); /* the standard */
+    -moz-border-radius: .4em;
+    -webkit-border-radius: .4em;
+    border-radius: .4em; }
 	
 div#JournalCL a {
-	background: #999; 
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(.2, #ddd), color-stop(1, #999)); 
-	background: -moz-linear-gradient(center top, #ddd 20%, #999 100%);
-	border: 1px solid #777; 
-	border-bottom-color: #333; 
-	color: #343434; 
-	margin: 0 .5em 0 2em; }
+	background: #999;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(.2, #ddd), color-stop(1, #999));
+        background: -moz-linear-gradient(center top, #ddd 20%, #999 100%);
+        border: 1px solid #777;
+        border-bottom-color: #333;
+        color: #343434;
+        margin: 0 .5em 0 2em;}
 
 table#JournalLinkTable {
 	width: 95% !important;
@@ -277,6 +292,42 @@ p.lib-big-text {
 	font-weight: bold; }
 
 /* taken from http://gvsulib.com/labs/link-resolver/css/linkresolver.css -- missing from github version. -lsw */
+
+
+p.lib-big-text { 
+	margin-top: 2em;
+	font-size: 100%;
+        /* font-size: 120%; */
+	font-weight: bold; }
+
+/* taken from http://gvsulib.com/labs/link-resolver/css/linkresolver.css -- missing from github version. -lsw */
+
+p.lib-big-text { 
+	margin-top: 2em;
+	font-size: 100%;
+        /* font-size: 120%; */
+	font-weight: bold; }
+
+/* taken from http://gvsulib.com/labs/link-resolver/css/linkresolver.css -- missing from github version. -lsw */
+td.CornerSE, 
+td.CornerSW, 
+td.BorderS, 
+td.BorderW,
+div.SS_NoResults {
+	/* Cruft cruft cruft! Stop the insanity */
+	display: none; }
+
+/* ####################################### */	
+/* Below are styles for javascript enabled */
+
+
+p.lib-big-text { 
+	margin-top: 2em;
+	font-size: 100%;
+        /* font-size: 120%; */
+	font-weight: bold; }
+
+/* taken from http://gvsulib.com/labs/link-resolver/css/linkresolver.css -- missing from github version. -lsw */
 #page-content {
 /*	padding-top: 1.5em; */
 	}
@@ -304,7 +355,8 @@ p.lib-big-text {
 	}
 
 #next-step a {
-	font-weight: normal; }
+	font-weight: normal;
+	color: #1F65A0; }
 
 #top-result li {
 	font-size: 1em; /* changed from 1 */
@@ -320,6 +372,7 @@ ul#top-result,
 
 #next-step ul li a {
 	text-decoration: none;
+	color: #1F65A0;
 	}
 
 #next-step {
@@ -341,7 +394,8 @@ a.holding-details {
 
 .event-body a {
 	text-decoration: none;
-	font-size: 1em;}
+	font-size: 1em;
+	color: #1F65A0; }
 
 .event-body h4 {
 	background: #ddd;
@@ -408,39 +462,3 @@ a.holding-details {
 	/* max-width: 400px; */
         }
 .SS_Holding table {
-	display:table;
-	}
-.SS_EJPPreContentHorizontalRules {
-	display:none; /* hide hr around search box */
-	}
-
-.SS_SkipNavigationLinks {
-	font-size: .725em; }
-
-.SS_CopyRightStatement {
-	display: none; /* hide Serials Solutions copyright */ 
-	}
-
-.SS_ResultsNoteGroup {
-        font-size: .814em; 
-        font-family: Arial, sans-serif;
-        font-weight: bold;
-	
-	}
-.SS_SearchResultsCount {
-	display:none; /* hide "Search titles 1 - x of x */
-	}
-
-.SS_EJPTermsOfUse {
-	display: none; /* hide terms of use links */
-	}
-
-.SSEJPLinkToTop {
-	font-size: .725em;
-	}
-.SS_HorizontalRules {
-	display: none; /* hide hr's at bottom of page above footer */
-	}
-.SS_SearchToolsGroup {
-	margin: 10px 0px 20px 0px;
-	}

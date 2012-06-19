@@ -278,25 +278,25 @@ if((format === "Journal" || format === "JournalFormat" || format === "Unknown") 
 
 	if(TopDatabaseName === "Library Print Journals") {
 	
-	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Find a Copy</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Find a Copy</a> in ' + jQuery.trim(DatabaseNames[0]) + '</li></ul>';
 	var hasPrint = true;	
 	} else {
 
-	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Browse the Journal Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Browse the Journal Online</a> in ' + jQuery.trim(DatabaseNames[0]) + '</li></ul>';
 
 	} 
 
 } else  if ((articleLinks[0] !== "NA")  && (format === "Journal" || format === "JournalFormat" || format === "Unknown")) { // There is an article link
 		
-var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a> <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
+var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from ' + jQuery.trim(DatabaseNames[0]) + ' <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
 	
-} else { // a book link remains - lsw 
+} else { // a book or chapter link remains - lsw 
 
 	if (chapterLinks[0] !== "NA") { //there is a chapter link
- 	var topResultdiv = '<ul id="top-result"><li><a href="' + chapterLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> in <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
+ 	var topResultdiv = '<ul id="top-result"><li><a href="' + chapterLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> in ' + jQuery.trim(DatabaseNames[0]) + '</li></ul>';
 	 } else { // book level link 
 
-	var topResultdiv = '<ul id="top-result"><li><a href="' + bookLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[0] + '" class="SS_DatabaseHyperLink">' + jQuery.trim(DatabaseNames[0]) + '</a></li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + bookLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from ' + jQuery.trim(DatabaseNames[0]) + '</li></ul>';
 
 
 }}
@@ -330,7 +330,7 @@ if(articleLinks[i] !== "NA") { // Article link - article has to be online
 		
 	}
 	
-	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + articleLinks[i] + '" target="_blank">Full Text Online</a> from <a href="' + DatabaseLinks[i] + '" class="SS_DatabaseHyperLink">' + DatabaseNames[i] + '</a><a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[i] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
+	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + articleLinks[i] + '" target="_blank">Full Text Online</a> from ' + DatabaseNames[i] + ' <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[i] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
 	
 	
 } else { // No article link
@@ -357,7 +357,7 @@ if(articleLinks[i] !== "NA") { // Article link - article has to be online
 
 		}
 		
-		onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Browse the Journal Online</a> in <a href="' + DatabaseLinks[i] + '" class="SS_DatabaseHyperLink">' + DatabaseNames[i] + '</a><a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
+		onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Browse the Journal Online</a> in ' + DatabaseNames[i] + ' <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
 		
 	}
 }
@@ -469,7 +469,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li>' + nextstepsLink;};
 
 
-	jQuery("#360link-reset").html('<div id="page-content" style="margin: 0 auto 0; max-width:940px; min-height: 600px;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a><a id="refworks" href="' + refworksLink + '">Export to Refworks</a></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --><!-- <div id="footer"><p>Use of most electronic resources at the George Washington University is limited to current students, staff, and faculty, and is subject to limitations (<a href="http://www.gelman.gwu.edu/search-1/appropriate-use-of-electronic-resources">read more</a>). Library staff <a href="' + formLink + '" target="_blank">report a problem.</a></p></div> --></div>');
+	jQuery("#360link-reset").html('<div id="page-content" style="margin: 0 auto 0; max-width:940px; min-height: 600px;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> [<a id="refworks" href="' + refworksLink + '">send to RefWorks</a>]</div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
 
 }
 
