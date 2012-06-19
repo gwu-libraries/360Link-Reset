@@ -367,7 +367,7 @@ ul#top-result,
 .event-body ul,
 #next-step ul {
 	list-style: none;
-	margin:0;
+/*	margin:0; */
 	padding:0; }
 
 #next-step ul li a {
@@ -379,7 +379,8 @@ ul#top-result,
 	border-top: 1px solid #ddd; }
 
 a.holding-details {
-		font-size: 1em !important; }
+	font-size: .814em !important;
+        color: #1F65A0; }
 
 .event-head {
 	color: #1F65A0;

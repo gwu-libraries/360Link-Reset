@@ -218,7 +218,7 @@ jQuery("table#BookLinkTable").find("tr").each(function(index) { // Grab values f
 
                 }
 
-                // Get the journal or book link, if available
+                // Get the  book link, if available
 
                 if(jQuery(this).find("#BookCL a").length > 0) { // There is a book link -lsw
 
@@ -288,7 +288,7 @@ if((format === "Journal" || format === "JournalFormat" || format === "Unknown") 
 
 } else  if ((articleLinks[0] !== "NA")  && (format === "Journal" || format === "JournalFormat" || format === "Unknown")) { // There is an article link
 		
-var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from ' + jQuery.trim(DatabaseNames[0]) + ' <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
+var topResultdiv = '<ul id="top-result"><li><a href="' + articleLinks[0] + '" class="article-button" target="_blank">Full Text Online</a> from ' + jQuery.trim(DatabaseNames[0]) + ' [<a class="holding-details" id="details">details</a>]<div class="tooltip"><p><a href="' + journalLinks[0] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
 	
 } else { // a book or chapter link remains - lsw 
 
@@ -322,7 +322,7 @@ while(i < results) {
 
 // Check for an article link
 
-if(articleLinks[i] !== "NA") { // Article link - article has to be online
+if((articleLinks[i] !== "NA") && (format === "Journal" || format === "JournalFormat" || format === "Unknown")) { // Article link - article has to be online
 	
 	if(onlineAdditionalResults === "") { // First online article listed, add the header
 		
@@ -330,36 +330,38 @@ if(articleLinks[i] !== "NA") { // Article link - article has to be online
 		
 	}
 	
-	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + articleLinks[i] + '" target="_blank">Full Text Online</a> from ' + DatabaseNames[i] + ' <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p><a href="' + journalLinks[i] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
+	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + articleLinks[i] + '" target="_blank">Full Text Online</a> from ' + DatabaseNames[i] + ' [<a class="holding-details">details</a>]<div class="tooltip"><p><a href="' + journalLinks[i] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
 	
 	
-} else { // No article link
-	
-	// Check to see if it is available in print only and save it as a separate variable to be broken out in another list
-	
-	
-	if(jQuery.trim(DatabaseNames[i]) === "Library Print Journals") { // Item is in print; changed for GWU -lsw
-		var hasPrint = true;
-		if(printAdditionalResults === "") { // First online article listed, add the header
+} else if(jQuery.trim(DatabaseNames[i]) === "Library Print Journals") { // Item is in print; changed for GWU;  // Check to see if it is available in print only and save it as a separate variable to be broken out in another list
+ 
+	var hasPrint = true;
+	if(printAdditionalResults === "") { // First online article listed, add the header
 
-			printAdditionalResults = printAdditionalResults + "<h4>Print</h4><ul>";
+	printAdditionalResults = printAdditionalResults + "<h4>Print</h4><ul>";
 			
 
-		}
-		
-		printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries</li>';
-		
-	} else { // Item is online
-		
-		if(onlineAdditionalResults === "") { // First online article listed, add the header
-
-			onlineAdditionalResults = onlineAdditionalResults + "<h4>Online</h4><ul>";
-
-		}
-		
-		onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Browse the Journal Online</a> in ' + DatabaseNames[i] + ' <a class="holding-details"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/help.png" alt="" /></a><div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
-		
 	}
+		
+	printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries</li>';
+		
+
+} else { // Item is online and is not an article
+		
+	if(onlineAdditionalResults === "") { // First online article listed, add the header
+
+		onlineAdditionalResults = onlineAdditionalResults + "<h4>Online</h4><ul>";
+
+	}
+	
+	if (chapterLinks[i] !== "NA") {
+
+	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + chapterLinks[i] + '" target="_blank">Full Text Online</a> in ' + DatabaseNames[i] + '</li>'; 
+
+	} else {
+		
+	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + bookLinks[i] + '" target="_blank">Full Text Online</a> in ' + DatabaseNames[i] + '</li>';
+	}	
 }
 
 i = i + 1;
