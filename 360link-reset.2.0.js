@@ -56,7 +56,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	var journalissn = jQuery("td#CitationJournalIssnValue").text();
 	journalissn = jQuery.trim(journalissn); // Trim leading white space form journal issn
         if (journalissn !== "") {  //get best search param for catalog search 
-                var searchURL = "http://findit.library.gwu.edu/item/?issn=" + journalissn;
+                var searchURL = "http://gwfindit-test.wrlc.org/issn/" + journalissn;
                 journalissn = '<span id="CitationJournalIssnValue">&nbsp;(ISSN:&nbsp;' + journalissn + ')</span>'; } // Add context to citation so if var is blank it will not display
                 else {
                 searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=JALL+(JALL)&SAB1=" + journalTitleEncode;
@@ -94,7 +94,7 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	if (bookisbn !== "") {  //get best search param for catalog search 
 		var searchIsbns = bookisbn.split(", ");
 		var firstISBN = searchIsbns[0].replace(/-/g,"");
-		searchURL = "http://findit.library.gwu.edu/item/?isbn=" + firstISBN;
+		searchURL = "http://gwfindit-test.wrlc.org/isbn/" + firstISBN;
 		bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
 		else {
 		searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=Local&CNT=25&HIST=1&Search_Arg=" + bookTitleLink + "&Search_Code=TALL";
@@ -282,7 +282,7 @@ if((format === "Journal" || format === "JournalFormat" || format === "Unknown") 
 	var hasPrint = true;	
 	} else {
 
-	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Browse the Journal Online</a> in ' + jQuery.trim(DatabaseNames[0]) + '</li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Browse the Journal Online</a> in ' + jQuery.trim(DatabaseNames[0]) + ' [<a class="holding-details" id="details">details</a>]<div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
 
 	} 
 
@@ -333,7 +333,7 @@ if((articleLinks[i] !== "NA") && (format === "Journal" || format === "JournalFor
 	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + articleLinks[i] + '" target="_blank">Full Text Online</a> from ' + DatabaseNames[i] + ' [<a class="holding-details">details</a>]<div class="tooltip"><p><a href="' + journalLinks[i] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
 	
 	
-} else if(jQuery.trim(DatabaseNames[i]) === "Library Print Journals") { // Item is in print; changed for GWU;  // Check to see if it is available in print only and save it as a separate variable to be broken out in another list
+} else if(jQuery.trim(DatabaseNames[i]) === "Library Print Journals") { // Item is in print holdings; changed for GWU;  // Check to see if it is available in print only and save it as a separate variable to be broken out in another list
  
 	var hasPrint = true;
 	if(printAdditionalResults === "") { // First online article listed, add the header
@@ -346,7 +346,18 @@ if((articleLinks[i] !== "NA") && (format === "Journal" || format === "JournalFor
 	printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries</li>';
 		
 
-} else { // Item is online and is not an article
+} else if ((articleLinks[i] === "NA") && (journalLinks[i] !== "NA")) { //is not an article but is a journal-level link
+ 
+	if(onlineAdditionalResults === "") { // First online article listed, add the header
+
+                onlineAdditionalResults = onlineAdditionalResults + "<h4>Online</h4><ul>";
+
+        }
+
+        onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Browse Journal Online</a> in' + DatabaseNames[i] + ' [<a class="holding-details">details</a>]<div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
+	
+
+} else { // Item is online and is not an article, is not a journal
 		
 	if(onlineAdditionalResults === "") { // First online article listed, add the header
 
@@ -481,8 +492,8 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 // Let's show a tooltip highlighting Document Delivery when the user has tried a few sources.
 // First, let's add the code for the tooltip:
 
-jQuery("#next-step ul").append('<li class="doc-del-tooltip">Having trouble? You can order a copy from Document Delivery, and they\'ll get it for you. It\'s free!<br /><a href="' + illiadLink + '" class="lib-db-access-button" style="font-size: 1.2em !important;">Order a Copy</a></li>');
-jQuery(".doc-del-tooltip").hide();
+//jQuery("#next-step ul").append('<li class="doc-del-tooltip">Having trouble? You can order a copy from Document Delivery, and they\'ll get it for you. It\'s free!<br /><a href="' + illiadLink + '" class="lib-db-access-button" style="font-size: 1.2em !important;">Order a Copy</a></li>');
+//jQuery(".doc-del-tooltip").hide();
 
 // Now let's count clicks
 /*
@@ -513,7 +524,7 @@ jQuery("#360link-reset ul li a").click(function() {
 }); */
 
 // temporarily commetinging outn 
-//});
+//}); original close brackets.
 
 // copied and added by lsw. was in GVSUs SerSol footer configuration box instead of in this file.
  
