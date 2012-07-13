@@ -139,7 +139,7 @@ img, object, embed {
 
 table {
 	border-collapse: collapse;
-	display: inline-table;
+/*	display: inline-table; */
 }
 
 table, table tr, table td {
@@ -194,7 +194,8 @@ a.article-button {
     border-style: solid;
     border-width: 1px;
     color: white;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 0 2px rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.29);
+    /*box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 0 2px rgba(255, 255, 255, 0.3) inset, 0 1px 2px rgba(0, 0, 0, 0.29);*/
+    box-shadow: inset 0px 1px 0px rgba(255,255,255,0.3), inset 0px 0px 2px rgba(255,255,255,0.3), 0px 1px 2px rgba(0,0,0,0.29);
     text-decoration: none;
     font-size: 1em;
     padding: .3em .4em;
@@ -202,14 +203,15 @@ a.article-button {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #1F65A0), color-stop(100%, #4282B1)); /* Safari 4+, Chrome 2+ */     
     background: -o-linear-gradient(#1F65A0, #4282B1); /* Opera 11.10 */ 
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1'); /* IE6 & IE7 */ 
-    ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1')"; /* IE8+ */ 
+    ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1'); /* IE8+ */ 
     background: linear-gradient(#1F65A0, #4282B1); /* the standard */
     -moz-border-radius: .4em;
     -webkit-border-radius: .4em;
-    border-radius: .4em; }
-	
+    border-radius: .4em;
+    display: inline-block;
+    }
 
-div#ArticleCL a,
+/* div#ArticleCL a,
 a.article-button {
     border-color: #4081AF #4081AF #20559A;
     border-style: solid;
@@ -219,15 +221,16 @@ a.article-button {
     text-decoration: none;
     font-size: 1em;
     padding: .3em .4em;
-    background: -moz-linear-gradient(center top , #1F65A0 20%, #4282B1 100%); /* mozilla */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #1F65A0), color-stop(100%, #4282B1)); /* Safari 4+, Chrome 2+ */     
-    background: -o-linear-gradient(#1F65A0, #4282B1); /* Opera 11.10 */ 
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1'); /* IE6 & IE7 */ 
-    ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1')"; /* IE8+ */ 
-    background: linear-gradient(#1F65A0, #4282B1); /* the standard */
-    -moz-border-radius: .4em;
-    -webkit-border-radius: .4em;
+    background: -moz-linear-gradient(center top , #1F65A0 20%, #4282B1 100%); */ /* mozilla */
+/*    background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #1F65A0), color-stop(100%, #4282B1)); *//* Safari 4+, Chrome 2+ */     
+   /* background: -o-linear-gradient(#1F65A0, #4282B1); *//* Opera 11.10 */ 
+   /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1'); */ /* IE6 & IE7 */ 
+  /*  ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#1F65A0', endColorstr='#4282B1')";*/ /* IE8+ */ 
+  /*  background: linear-gradient(#1F65A0, #4282B1);*/ /* the standard */
+ /*   -moz-border-radius: .4em; */
+  /*  -webkit-border-radius: .4em;
     border-radius: .4em; }
+*/
 	
 div#JournalCL a {
 	background: #999;
@@ -450,8 +453,6 @@ a.holding-details {
 	}
 
 /* Journal List */
-#journalList {
-	}
 #journalList a tr td li {
 	font-size: 1em;
         font-family: Arial, sans-serif;
@@ -459,9 +460,55 @@ a.holding-details {
 .SS_LetterLinks {
 	font-size: .814em;
 	}
-.SS_Holding {
+
+div.SS_Holding {
 	font-size: .814em;
         font-family: Arial, sans-serif;
-	/* max-width: 400px; */
+/* 	max-width: 400px;  */ 
         }
+
 .SS_Holding table {
+  display:block;
+  }
+
+.SS_EJPPreContentHorizontalRules{
+  display:none; /*hide hr around search box */
+  }
+
+.SS_SkipNavigationLinks{
+ font-size: .725em; 
+ }
+
+.SS_CopyRightStatement {
+ display: none; /* hide Serials Solutions copyright */
+ }
+
+.SS_ResultsNoteGroup {
+  font-size: .814em;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+ }
+ 
+.SS_SearchResultsCount {
+ display:none; /* hide "Search titles 1 - x of x */
+ }
+ 
+span.SS_EJPTermsOfUse {
+ display: none; /* hide terms of use links */
+ }
+
+.SSEJPLinkToTop {
+  font-size: .725em;
+ }
+ 
+.SS_HorizontalRules {
+ display: none; /* hide hr's at bottom of page above footer */
+ }
+ 
+.SS_SearchToolsGroup {
+ margin: 10px 0px 20px 0px;
+ }
+
+.SSJournalAlternateTitle {
+ margin: 0px 0px 0px 5px;
+ }

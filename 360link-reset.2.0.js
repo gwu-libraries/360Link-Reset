@@ -135,7 +135,7 @@ if (format === "UnknownFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=a' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
+var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
 	
 }
 
@@ -166,6 +166,7 @@ jQuery("table#JournalLinkTable").find("tr").each(function(index) { // Grab value
 			var newHref = jQuery(this).find("#JournalCL a").attr("href");
 
 			journalLinksdata = journalLinksdata + newHref + "|||";
+
 
 		} else { // No article length
 
@@ -278,7 +279,7 @@ if((format === "Journal" || format === "JournalFormat" || format === "Unknown") 
 
 	if(TopDatabaseName === "Library Print Journals") {
 	
-	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Find a Copy</a> in ' + jQuery.trim(DatabaseNames[0]) + '</li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Locate the Journal</a> at ' + 'GW Libraries (check years available)' + '</li></ul>';
 	var hasPrint = true;	
 	} else {
 
@@ -343,7 +344,7 @@ if((articleLinks[i] !== "NA") && (format === "Journal" || format === "JournalFor
 
 	}
 		
-	printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries</li>';
+	printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries (check years of available)</li>';
 		
 
 } else if ((articleLinks[i] === "NA") && (journalLinks[i] !== "NA")) { //is not an article but is a journal-level link
@@ -461,11 +462,6 @@ var Resultdiv = topResultdiv + '</ul>';
 	
 }
 
-//create link to Google Form for library staff testing
- 
-var openUrl = escape(location.href);	
-var formLink = 'http://spreadsheets.google.com/viewform?formkey=dGM5aFpqX2V2d0NNU1VQcFc0TVhIRFE6MQ&entry_0=' + openUrl;
-
 
 // Do the magic if this is a link resolver display page:
 // Rewrite Serials Solutions terrible page with a nice semantic, clean div full of easy-to-follow markup
@@ -479,7 +475,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 
 //check and see if there are print holdings.  if not, show a "search the catlog" link
 
-	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li>' + nextstepsLink;};
+	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + searchURL + '">See if the library has this journal</a></li>' + nextstepsLink;};
 
 
 	jQuery("#360link-reset").html('<div id="page-content" style="margin: 0 auto 0; max-width:940px; min-height: 600px;"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> [<a id="refworks" href="' + refworksLink + '">send to RefWorks</a>]</div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
