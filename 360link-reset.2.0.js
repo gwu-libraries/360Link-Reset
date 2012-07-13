@@ -56,7 +56,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	var journalissn = jQuery("td#CitationJournalIssnValue").text();
 	journalissn = jQuery.trim(journalissn); // Trim leading white space form journal issn
         if (journalissn !== "") {  //get best search param for catalog search 
-                var searchURL = "http://gwfindit-test.wrlc.org/issn/" + journalissn;
+                var searchURL = "http://findit.library.gwu.edu/issn/" + journalissn;
                 journalissn = '<span id="CitationJournalIssnValue">&nbsp;(ISSN:&nbsp;' + journalissn + ')</span>'; } // Add context to citation so if var is blank it will not display
                 else {
                 searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=JALL+(JALL)&SAB1=" + journalTitleEncode;
@@ -77,7 +77,7 @@ var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Re
 
 // Books
 
-if (format === "BookFormat" || format === "Book") {  //added Book -lsw
+if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	
 	var authorName = jQuery("td#CitationBookAuthorValue").text();
         authorName = jQuery.trim(authorName); //Trim leading white space from author name     
@@ -94,7 +94,7 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	if (bookisbn !== "") {  //get best search param for catalog search 
 		var searchIsbns = bookisbn.split(", ");
 		var firstISBN = searchIsbns[0].replace(/-/g,"");
-		searchURL = "http://gwfindit-test.wrlc.org/isbn/" + firstISBN;
+		searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN;
 		bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
 		else {
 		searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=Local&CNT=25&HIST=1&Search_Arg=" + bookTitleLink + "&Search_Code=TALL";
@@ -112,6 +112,46 @@ if (format === "BookFormat" || format === "Book") {  //added Book -lsw
 	var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
 	
 }
+
+// Dissertations
+
+if (format === "DissertationFormat" || format === "Dissertation" ) { // note sure if Dissertation is used but providing just in case 
+
+        var authorName = jQuery("td#CitationDissertationAuthorValue").text();
+        authorName = jQuery.trim(authorName); //Trim leading white space from author name     
+        var bookTitle = jQuery("td#CitationDissertationTitleValue").text();
+        bookTitle = jQuery.trim(bookTitle); // Trim leading white space form book title
+        var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
+        var bookDate = jQuery("td#CitationDissertationDateValue").text();
+        bookDate = jQuery.trim(bookDate); // Trim leading white space form journal name
+        if (bookDate != "") {
+                bookDate = '(' + bookDate + ')';
+                }
+	var institution = jQuery("td#CitationDissertationInstitutionValue").text();
+	institution = jQuery.trim(institution);
+        var bookisbn = jQuery("td#CitationDissertationISBNValue").text();
+        bookisbn = jQuery.trim(bookisbn); // Trim leading white space form journal name
+        if (bookisbn !== "") {  //get best search param for catalog search 
+                var searchIsbns = bookisbn.split(", ");
+                var firstISBN = searchIsbns[0].replace(/-/g,"");
+                searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN;
+                bookisbn = '&nbsp;<span id="CitationDissertationISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
+                else {
+                searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=Local&CNT=25&HIST=1&Search_Arg=" + bookTitleLink + "&Search_Code=TALL";
+                }
+
+        // Ok, let's get rid of that table and replace it with a semantic div for our citation
+
+        var citationDiv = '<span id="CitationDissertationAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationDissertationDateValue">' + bookDate + '</span>.&nbsp; <span id="CitationDissertationTitleValue"><em>' + bookTitle + '.</em></span> ' + '<span id="CitationDissertationInstitutionValue">' + institution + '</span>.' + bookisbn;
+
+
+        // Replace the final table with semantic HTML, along with the dynamic links
+        // Remove the line above and uncomment the line below to add items to the bottom of your link resolver
+
+        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
+
+}
+
 
 // Unknown format - treat as book?
 
@@ -344,7 +384,7 @@ if((articleLinks[i] !== "NA") && (format === "Journal" || format === "JournalFor
 
 	}
 		
-	printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries (check years of available)</li>';
+	printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries (check years available)</li>';
 		
 
 } else if ((articleLinks[i] === "NA") && (journalLinks[i] !== "NA")) { //is not an article but is a journal-level link
