@@ -84,7 +84,12 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	var bookTitle = jQuery("td#CitationBookTitleValue").text();
 	bookTitle = jQuery.trim(bookTitle); // Trim leading white space form book title
 	var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
-	var bookDate = jQuery("td#CitationBookDateValue").text();
+        var chapterTitle = jQuery("td#CitationBookChapterValue").text();
+        chapterTitle = jQuery.trim(chapterTitle);
+	if (chapterTitle != "") {
+		chapterTitle = chapterTitle + '.';
+		} 
+        var bookDate = jQuery("td#CitationBookDateValue").text();
 	bookDate = jQuery.trim(bookDate); // Trim leading white space form journal name
 	if (bookDate != "") {
 		bookDate = '(' + bookDate + ')';
@@ -102,7 +107,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
 
-	var citationDiv = '<span id="CitationBookAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationBookDateValue">' + bookDate + '</span>.&nbsp; <span id="CitationBookTitleValue"><em>' + bookTitle + '</em></span>' + bookisbn;
+	var citationDiv = '<span id="CitationBookAuthorValue">' + authorName + '</span>&nbsp; <span id="CitationBookDateValue">' + bookDate + '</span>.&nbsp; <span id="CitationBookChapterValue">' + chapterTitle + '</span>&nbsp;<span id="CitationBookTitleValue"><em>' + bookTitle + '</em></span>' + bookisbn;
 
 
 	
