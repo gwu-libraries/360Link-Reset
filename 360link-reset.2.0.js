@@ -523,15 +523,9 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + searchURL + '">See if the library has this journal</a></li>' + nextstepsLink;};
 
 
-<<<<<<< HEAD
 	jQuery("#360link-reset").html('<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> [<a id="refworks" href="' + refworksLink + '">send to RefWorks</a>]</div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
-=======
-	jQuery("#360link-reset").html('<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> [<a id="refworks" href="' + refworksLink + '">send to RefWorks</a>]</div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
->>>>>>> csstest
 
-
-
-
+}
 // Let's show a tooltip highlighting Document Delivery when the user has tried a few sources.
 // First, let's add the code for the tooltip:
 
