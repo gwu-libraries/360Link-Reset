@@ -5,6 +5,14 @@ jQuery(document).ready(function() {
 // Since 360Link loads Prototype, need to use the jQuery prefix instead of $ 
 // to avoid conflicts with Prototype.
 
+// script to be inserted in 360link div
+// script for "Let us know!" link to reporting a problem via Google Forms 
+
+var scriptDiv = '<script>function formFeedback() {var formUrl = "http://spreadsheets.google.com/viewform?formkey=dFk4bXVxc280d0trWmJmUFhqSkZSaFE6MQ&entry_2=" + encodeURIComponent(location.href); location.href = formUrl;}</script>';
+
+
+//Begin main 360Link Reset
+
 jQuery("head link").remove(); // Remove existing styles
 
 var results = ""; 
@@ -69,9 +77,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
-
-
+var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li>';
 
 }
 
@@ -114,7 +120,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-	var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
+	var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li>';
 	
 }
 
@@ -153,7 +159,7 @@ if (format === "DissertationFormat" || format === "Dissertation" ) { // note sur
         // Replace the final table with semantic HTML, along with the dynamic links
         // Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
+        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li>';
 
 }
 
@@ -180,7 +186,7 @@ if (format === "UnknownFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="mailto:gwlib-eresources@groups.gwu.edu">Let us know!</a></li>';
+var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li>';
 	
 }
 
@@ -523,7 +529,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + searchURL + '">See if the library has this journal</a></li>' + nextstepsLink;};
 
 
-	jQuery("#360link-reset").html('<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> [<a id="refworks" href="' + refworksLink + '">send to RefWorks</a>]</div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
+	jQuery("#360link-reset").html(scriptDiv + '<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> [<a id="refworks" href="' + refworksLink + '">send to RefWorks</a>]</div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
 
 }
 // Let's show a tooltip highlighting Document Delivery when the user has tried a few sources.
