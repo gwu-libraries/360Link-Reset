@@ -64,7 +64,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	var journalissn = jQuery("td#CitationJournalIssnValue").text();
 	journalissn = jQuery.trim(journalissn); // Trim leading white space form journal issn
         if (journalissn !== "") {  //get best search param for catalog search 
-                var searchURL = "http://findit.library.gwu.edu/issn/" + journalissn;
+                var searchURL = "http://findit.library.gwu.edu/issn/" + journalissn + location.search;
                 journalissn = '<span id="CitationJournalIssnValue">&nbsp;(ISSN:&nbsp;' + journalissn + ')</span>'; } // Add context to citation so if var is blank it will not display
                 else {
                 searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=JALL+(JALL)&SAB1=" + journalTitleEncode;
@@ -105,7 +105,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	if (bookisbn !== "") {  //get best search param for catalog search 
 		var searchIsbns = bookisbn.split(", ");
 		var firstISBN = searchIsbns[0].replace(/-/g,"");
-		searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN;
+		searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN + location.search;
 		bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
 		else {
 		searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=Local&CNT=25&HIST=1&Search_Arg=" + bookTitleLink + "&Search_Code=TALL";
@@ -145,7 +145,7 @@ if (format === "DissertationFormat" || format === "Dissertation" ) { // note sur
         if (bookisbn !== "") {  //get best search param for catalog search 
                 var searchIsbns = bookisbn.split(", ");
                 var firstISBN = searchIsbns[0].replace(/-/g,"");
-                searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN;
+                searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN + location.search;
                 bookisbn = '&nbsp;<span id="CitationDissertationISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
                 else {
                 searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=Local&CNT=25&HIST=1&Search_Arg=" + bookTitleLink + "&Search_Code=TALL";
