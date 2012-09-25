@@ -31,7 +31,10 @@ var hasPrint = false;
 var illiadLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('Interlibrary Loan')").attr("href");
 var refworksLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('RefWorks')").attr("href");
 var melLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('MeLCat')").attr("href"); // Currently not used, but we *could* use it
-
+var medicalLink = location.href;
+medicalLink = medicalLink.replace("uz4ug4lz9g","ck8gh5qu6z");
+medicalLink = medicalLink.replace("findit.library.gwu.edu/go","ck8gh5qu6z.search.serialssolutions.com/"); 
+ 
 // Build the citation
 
 // Journals
@@ -77,7 +80,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li>';
+var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 
 }
 
@@ -120,7 +123,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-	var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li>';
+	var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 	
 }
 
@@ -159,7 +162,7 @@ if (format === "DissertationFormat" || format === "Dissertation" ) { // note sur
         // Replace the final table with semantic HTML, along with the dynamic links
         // Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li>';
+        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 
 }
 
@@ -186,7 +189,7 @@ if (format === "UnknownFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li>';
+var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 	
 }
 
