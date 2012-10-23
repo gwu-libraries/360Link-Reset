@@ -220,7 +220,7 @@ jQuery("table#JournalLinkTable").find("tr").each(function(index) { // Grab value
 			var newHref = jQuery(this).find("#JournalCL a").attr("href");
 
 			journalLinksdata = journalLinksdata + newHref + "|||";
-
+	
 
 		} else { // No article length
 
@@ -281,7 +281,13 @@ jQuery("table#BookLinkTable").find("tr").each(function(index) { // Grab values f
 
                         bookLinksdata = bookLinksdata + newHref + "|||";
 
-                } else { // No article length
+              } else if (jQuery(this).find("#DatabaseCL a").length > 0) {
+
+			var newHref = jQuery(this).find("#DatabaseCL a").attr("href");
+
+                        bookLinksdata = bookLinksdata + newHref + "|||";
+
+		} else { // No article length
 
                         bookLinksdata = bookLinksdata + "NA|||";
 

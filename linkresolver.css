@@ -493,3 +493,6 @@ span.SS_EJPTermsOfUse {
 .SSJournalAlternateTitle {
  margin: 0px 0px 0px 5px;
  }
+.accessibility_label {
+ display: none;
+ }
