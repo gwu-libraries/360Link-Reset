@@ -178,6 +178,10 @@ td#CitationJournalIssnValue, td#CitationJournalVolumeValue {
 	width: 100%;
 	margin: 1em 0; }
 
+.refworks-link {
+	display: inline;
+	font-size: .814em;
+	}
 a#refworks {
 /*	display: inline-block;
  	padding-top: 20px;
@@ -321,7 +325,7 @@ p.lib-big-text {
 	
 #citation {
 	line-height: 1.5em;
-	font-size: .814em !important; 
+	font-size: 1em; 
 	margin-bottom: 1em;
 	color: #555;
 	}
