@@ -343,7 +343,7 @@ if((format === "Journal" || format === "JournalFormat" || format === "Unknown") 
 	var hasPrint = true;	
 	} else {
 
-	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Browse the Journal Online</a> in ' + jQuery.trim(DatabaseNames[0]) + ' [<a class="holding-details" id="details">details</a>]<div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[0] + '</p></div></li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Browse the Journal Online</a> in ' + jQuery.trim(DatabaseNames[0]) + ' <span class="date-details">(<i>' + dateRange[0] + '</i>)</span></li></ul>';
 
 	} 
 
@@ -394,7 +394,9 @@ if((articleLinks[i] !== "NA") && (format === "Journal" || format === "JournalFor
 	onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + articleLinks[i] + '" target="_blank">Full Text Online</a> from ' + DatabaseNames[i] + ' [<a class="holding-details">details</a>]<div class="tooltip"><p><a href="' + journalLinks[i] + '" style="text-decoration: none;">Browse Journal</a></p><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
 	
 	
-} else if(jQuery.trim(DatabaseNames[i]) === "Library Print Journals") { // Item is in print holdings; changed for GWU;  // Check to see if it is available in print only and save it as a separate variable to be broken out in another list
+} else if(jQuery.trim(DatabaseNames[i]) === "Library Print Journals") { // Item is in print holdings; changed for GWU;  
+
+	// Check to see if it is available in print only and save it as a separate variable to be broken out in another list
  
 	var hasPrint = true;
 	if(printAdditionalResults === "") { // First online article listed, add the header
@@ -415,7 +417,7 @@ if((articleLinks[i] !== "NA") && (format === "Journal" || format === "JournalFor
 
         }
 
-        onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Browse Journal Online</a> in' + DatabaseNames[i] + ' [<a class="holding-details">details</a>]<div class="tooltip"><p style="font-size: 1em;"><i>Dates covered:</i><br />' + dateRange[i] + '</p></div></li>';
+        onlineAdditionalResults = onlineAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Browse Journal Online</a> in' + DatabaseNames[i] + ' <span class="date-details">(<i>' + dateRange[i] + '</i>)</span></li>';
 	
 
 } else { // Item is online and is not an article, is not a journal

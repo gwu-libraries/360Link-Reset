@@ -386,6 +386,10 @@ ul#top-result,
 	background: #ddd;
 	padding: .3em .5em; }
 
+.date-details {
+	font-size: .814em;
+	}
+
 a.holding-details {
         font-size: .814em !important;
         color: #1F65A0;
