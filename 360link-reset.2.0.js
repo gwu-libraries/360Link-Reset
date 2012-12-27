@@ -80,7 +80,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Request from another local library  or via Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 
 }
 
@@ -123,7 +123,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-	var nextstepsLink = '<li>Want to check the library catalog? <a href="' + searchURL + '">Search for this item</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request from another library via Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+	var nextstepsLink = '<li>Check if the library has another version: <a href="' + searchURL + '">Search the library catalog</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 	
 }
 
@@ -370,7 +370,8 @@ if(additionalLinksnum > 0) { // There are additional results
 if(additionalLinksnum === 1) { // Only 1 additional result
 	var showResultsLabel = "Show 1 More Result"; 
 } else { // More than one result
-	var showResultsLabel = "Show " + additionalLinksnum + " More Full-Text Options";
+	var showResultsLabel = "Show more full-text options";
+
 }
 
 // Now build the results div by iterating through the additional results the correct number of times starting with [1]
@@ -537,8 +538,8 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 
 //check and see if there are print holdings.  if not, show a "search the catalog" link
 
-//hiding for now, see if this link is really needed 
-//	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Look for a copy nearby: <a href="' + searchURL + '">See if the library has this journal</a></li>' + nextstepsLink;};
+//only needed for checking if another library has print. 
+	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Not online or at GW? <a href="' + searchURL + '">Check if another local library has this journal</a></li>' + nextstepsLink;};
 
 
 	jQuery("#360link-reset").html(scriptDiv + '<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> <div class="refworks-link"><a id="refworks" href="' + refworksLink + '">send to RefWorks</a></div></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
@@ -595,10 +596,10 @@ jQuery("#360link-reset ul li a").click(function() {
 	jQuery(".event-head").click(function() {
 		jQuery(".event-body").slideToggle(400);
 		var current_text = jQuery(".event-head").text();
-		if(current_text === "Hide Additional Results") {
-		  jQuery(".event-head").text('Show More Results');
+		if(current_text === "Hide additional options") {
+		  jQuery(".event-head").text('Show more options');
 		  } else {
-		  jQuery(".event-head").text('Hide Additional Results');
+		  jQuery(".event-head").text('Hide additional options');
 		  }
 	});
 
