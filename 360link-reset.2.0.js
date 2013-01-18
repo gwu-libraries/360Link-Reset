@@ -28,12 +28,19 @@ var refinerlink = jQuery("#RefinerLink0 a").attr("href");
 var hasPrint = false;
 
 // The following are special links created by Serials Solutions for us. These can guide you in adding your own
-var illiadLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('Interlibrary Loan')").attr("href");
+var illiadLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('Interlibrary Loan')").attr("href");  
+var clsLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('Consortial Loan')").attr("href"); 
 var refworksLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('RefWorks')").attr("href");
 var melLink = jQuery("table.CandyWrapper:last a.AnchorButton:contains('MeLCat')").attr("href"); // Currently not used, but we *could* use it
 var medicalLink = location.href;
 medicalLink = medicalLink.replace("uz4ug4lz9g","ck8gh5qu6z");
 medicalLink = medicalLink.replace("findit.library.gwu.edu/go","ck8gh5qu6z.search.serialssolutions.com/"); 
+
+//select correct deliveryLink to use
+var deliveryLink = illiadLink;
+if (window.location.href.indexOf("issn") > 0) {
+	deliveryLink = clsLink;
+	}
  
 // Build the citation
 
@@ -604,7 +611,7 @@ jQuery("#360link-reset ul li a").click(function() {
 	});
 
 	if (format === "Journal" || format === "JournalFormat") {
-	jQuery(".holding-details").tooltip({effect: 'slide',offset:[0,0]});
+	jQuery(".holding-details").tooltip({effect: 'toggle',offset:[20,70]});
 	};
 
 });
