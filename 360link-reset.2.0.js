@@ -346,7 +346,7 @@ if((format === "Journal" || format === "JournalFormat" || format === "Unknown") 
 
 	if(TopDatabaseName === "Library Print Journals") {
 	
-	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + '" class="article-button" target="_blank">Locate the Journal</a> at ' + 'GW Libraries (check years available)' + '</li></ul>';
+	var topResultdiv = '<ul id="top-result"><li><a href="' + journalLinks[0] + location.search + '" class="article-button" target="_blank">Locate the Journal</a> at ' + 'GW Libraries (check years available)' + '</li></ul>';
 	var hasPrint = true;	
 	} else {
 
@@ -414,7 +414,7 @@ if((articleLinks[i] !== "NA") && (format === "Journal" || format === "JournalFor
 
 	}
 		
-	printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries (check years available)</li>';
+	printAdditionalResults = printAdditionalResults + '<li><a href="' + journalLinks[i] + location.search + '" target="_blank">Available in Print</a> at the <abbr title="George Washington University">GW</abbr> Libraries (check years available)</li>';
 		
 
 } else if ((articleLinks[i] === "NA") && (journalLinks[i] !== "NA")) { //is not an article but is a journal-level link
