@@ -8,7 +8,7 @@ jQuery(document).ready(function() {
 // script to be inserted in 360link div
 // script for "Let us know!" link to reporting a problem via Google Forms 
 
-var scriptDiv = '<script>function formFeedback() {var formUrl = "http://spreadsheets.google.com/viewform?formkey=dFk4bXVxc280d0trWmJmUFhqSkZSaFE6MQ&entry_2=" + encodeURIComponent(location.href); location.href = formUrl;}</script>';
+var scriptDiv = '<script>function formFeedback() {var formUrl = "https://docs.google.com/forms/d/1QOuW4vHeldTGar82n2qADRmiFYFN5AbhkUSnKizvU9o/viewform?entry.1478776111=" + encodeURIComponent(location.href); location.href = formUrl;}</script>';
 
 
 //Begin main 360Link Reset
