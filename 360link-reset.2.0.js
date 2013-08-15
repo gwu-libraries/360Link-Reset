@@ -77,7 +77,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
                 var searchURL = "http://findit.library.gwu.edu/issn/" + journalissn + location.search;
                 journalissn = '<span id="CitationJournalIssnValue">&nbsp;(ISSN:&nbsp;' + journalissn + ')</span>'; } // Add context to citation so if var is blank it will not display
                 else {
-                searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=JALL+(JALL)&SAB1=" + journalTitleEncode;
+                searchURL = "http://surveyor.gelman.gwu.edu/?q=title:" + journalTitleEncode;
                 }
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
@@ -87,7 +87,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Article\']);" target="_blank">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 
 }
 
@@ -118,7 +118,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 		searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN + location.search;
 		bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
 		else {
-		searchURL = "http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=Local&CNT=25&HIST=1&Search_Arg=" + bookTitleLink + "&Search_Code=TALL";
+		searchURL = "http://surveyor.gelman.gwu.edu/?q=title:" + bookTitleLink;
 		} 
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
@@ -130,7 +130,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-	var nextstepsLink = '<li>Check if the library has another version: <a href="' + searchURL + '">Search the library catalog</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+	var nextstepsLink = '<li>Check if the library has another version: <a href="' + searchURL + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\',\'Catalog\',\'Book\']);" target="_blank">Search the library catalog</a></li><li>Not available anywhere? <a href="' + illiadLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\',\'Interlibrary Loan\',\'Book\']);" target="_blank">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 	
 }
 
@@ -169,7 +169,7 @@ if (format === "DissertationFormat" || format === "Dissertation" ) { // note sur
         // Replace the final table with semantic HTML, along with the dynamic links
         // Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request from another local library or via Interlibary Loan (ILL)</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Catalog\', \'Dissertation\']);" target="_blank">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '" " onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Dissertation\']);" target="_blank">Request from another local library or via Interlibary Loan (ILL)</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 
 }
 
@@ -196,7 +196,7 @@ if (format === "UnknownFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+var nextstepsLink = '<li>Find a copy nearby: <a href="http://catalog.wrlc.org/cgi-bin/Pwebrecon.cgi?DB=local&CNT=25&HIST=1&BOOL1=as+a+phrase&FLD1=TALL+(TALL)&SAB1=' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '" " onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Unknown\']);" target="_blank">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
 	
 }
 
@@ -546,7 +546,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 //check and see if there are print holdings.  if not, show a "search the catalog" link
 
 //only needed for checking if another library has print. 
-	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Not online or at GW? <a href="' + searchURL + '">Check if another local library has this journal</a></li>' + nextstepsLink;};
+	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Not online or at GW? <a href="' + searchURL + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Catalog\', \'Article\']);" target="_blank">Check if another local library has this journal</a></li>' + nextstepsLink;};
 
 
 	jQuery("#360link-reset").html(scriptDiv + '<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> <div class="refworks-link"><a id="refworks" href="' + refworksLink + '">send to RefWorks</a></div></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
