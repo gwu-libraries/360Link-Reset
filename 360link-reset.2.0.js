@@ -77,7 +77,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
                 var searchURL = "http://findit.library.gwu.edu/issn/" + journalissn + location.search;
                 journalissn = '<span id="CitationJournalIssnValue">&nbsp;(ISSN:&nbsp;' + journalissn + ')</span>'; } // Add context to citation so if var is blank it will not display
                 else {
-                searchURL = "http://surveyor.gelman.gwu.edu/?q=title:" + journalTitleEncode;
+                searchURL = "http://surveyor.library.gwu.edu/?q=title:" + journalTitleEncode;
                 }
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
@@ -118,7 +118,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 		searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN + location.search;
 		bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
 		else {
-		searchURL = "http://surveyor.gelman.gwu.edu/?q=title:" + bookTitleLink;
+		searchURL = "http://surveyor.library.gwu.edu/?q=title:" + bookTitleLink;
 		} 
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
