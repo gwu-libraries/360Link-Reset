@@ -41,7 +41,7 @@ var deliveryLink = illiadLink;
 if (window.location.href.indexOf("issn") > 0) {
 	deliveryLink = clsLink;
 	}
-var gaEventLink = "_gaq.push([\'_trackEvent\',\'Custom Links\',\'Unknown\',\'Unknown\']);";
+var gaEventLink = "_gaq.push(['_trackEvent','Custom Links','Unknown','Unknown']);";
 var catalogTarget = "";
  
 // Build the citation
@@ -78,12 +78,12 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
         if (journalissn !== "") {  //get best search param for catalog search 
                 var searchURL = "http://findit.library.gwu.edu/issn/" + journalissn + location.search;
 		catalogTarget = "Launchpad";
-		gaEventLink = "_gaq.push([\'_trackEvent\',\'Custom Links\','" + catalogTarget + "\',\'Article\']);";
+		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Article']);";
                 journalissn = '<span id="CitationJournalIssnValue">&nbsp;(ISSN:&nbsp;' + journalissn + ')</span>'; } // Add context to citation so if var is blank it will not display
                 else {
                 searchURL = "http://surveyor.library.gwu.edu/?q=title:" + journalTitleEncode;
 		catalogTarget = "Surveyor";
-		gaEventLink = "_gaq.push([\'_trackEvent\',\'Custom Links\','" + catalogTarget + "\',\'Article\']);";	
+		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Article']);";	
                 }
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
@@ -123,12 +123,12 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 		var firstISBN = searchIsbns[0].replace(/-/g,"");
 		searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN + location.search;
 		catalogTarget = "Launchpad";
-		gaEventLink = "_gaq.push([\'_trackEvent\',\'Custom Links\','" + catalogTarget + "\',\'Book\']);";
+		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Book']);";
 		bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
 		else {
 		searchURL = "http://surveyor.library.gwu.edu/?q=title:" + bookTitleLink;
 		catalogTarget = "Surveyor";
-		gaEventLink = "_gaq.push([\'_trackEvent\',\'Custom Links\','" + catalogTarget + "\',\'Book\']);";	
+		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Book']);";	
 		} 
 	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
@@ -167,12 +167,12 @@ if (format === "DissertationFormat" || format === "Dissertation" ) { // note sur
                 var firstISBN = searchIsbns[0].replace(/-/g,"");
                 searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN + location.search;
 		catalogTarget = "Launchpad";
-		gaEventLink = "_gaq.push([\'_trackEvent\',\'Custom Links\','" + catalogTarget + "\',\'Dissertation\']);";	
+		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Dissertation']);";	
                 bookisbn = '&nbsp;<span id="CitationDissertationISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
                 else {
                 searchURL = "http://surveyor.library.gwu.edu/?q=" + bookTitleLink;
 		catalogTarget = "Surveyor";
-		gaEventLink = "_gaq.push([\'_trackEvent\',\'Custom Links\','" + catalogTarget + "\',\'Dissertation\'])";	
+		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Dissertation'])";	
                 }
 
         // Ok, let's get rid of that table and replace it with a semantic div for our citation
@@ -198,8 +198,18 @@ if (format === "UnknownFormat") {
 	bookDate = jQuery.trim(bookDate); // Trim leading white space form journal name
 	var bookisbn = jQuery("td#CitationBookISBNValue").text();
 	bookisbn = jQuery.trim(bookisbn); // Trim leading white space form journal name
-	if (bookisbn !== "") { bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context so if var is blank it will not display
-	
+	if (bookisbn !== "") { 
+		var searchIsbns = bookisbn.split(", ");
+                var firstISBN = searchIsbns[0].replace(/-/g,"");
+                searchURL = "http://findit.library.gwu.edu/isbn/" + firstISBN + location.search;
+                catalogTarget = "Launchpad";
+                gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Unknown']);";
+                bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
+                else {
+                searchURL = "http://surveyor.library.gwu.edu/?q=title:" + bookTitleLink;
+                catalogTarget = "Surveyor";
+                gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Unknown']);";
+ 		}	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
 
 	var citationDiv = '<span id="CitationBookAuthorValue">' + authorName + '</span><span id="CitationBookDateValue">(' + bookDate + ')</span>.&nbsp; <span id="CitationBookTitleValue"><em>' + bookTitle + '</em></span>&nbsp; <span id="CitationBookISBNValue">&nbsp; </span>';
@@ -560,7 +570,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 //check and see if there are print holdings.  if not, show a "search the catalog" link
 
 //only needed for checking if another library has print. 
-	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Not online or at GW? <a href="' + searchURL + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Catalog\', \'Article\']);" target="_blank">Check if another local library has this journal</a></li>' + nextstepsLink;};
+	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Not online or at GW? <a href="' + searchURL + '" onClick="' + gaEventLink + '" target="_blank">Check if another local library has this journal</a></li>' + nextstepsLink;};
 
 
 	jQuery("#360link-reset").html(scriptDiv + '<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> <div class="refworks-link"><a id="refworks" href="' + refworksLink + '">send to RefWorks</a></div></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
