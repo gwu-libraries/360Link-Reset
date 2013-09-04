@@ -93,7 +93,7 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Article\']);" target="_blank">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+var nextstepsLink = '<li>Not available anywhere? <a href="' + illiadLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Article\']);" target="_blank">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();_gaq.push([\'_trackEvent\', \'Custom Links\', \'Report a problem\', \'Article\']);" target="_blank">Let us know!</a></li><li><a href="' + medicalLink + '" onclick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Himmelfarb\', \'Article\']);" target="_blank">Check Himmelfarb Library options</a></li>';
 
 }
 
@@ -140,7 +140,7 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 	// Replace the final table with semantic HTML, along with the dynamic links
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-	var nextstepsLink = '<li>Check if the library has another version: <a href="' + searchURL + '" onClick="' + gaEventLink + '" target="_blank">Search the library catalog</a></li><li>Not available anywhere? <a href="' + illiadLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\',\'Interlibrary Loan\',\'Book\']);" target="_blank">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+	var nextstepsLink = '<li>Check if the library has another version: <a href="' + searchURL + '" onClick="' + gaEventLink + '" target="_blank">Search the library catalog</a></li><li>Not available anywhere? <a href="' + illiadLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\',\'Interlibrary Loan\',\'Book\']);" target="_blank">Request a copy from Interlibrary Loan</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();_gaq.push([\'_trackEvent\', \'Custom Links\', \'Report a problem\', \'Book\']);" target="_blank">Let us know!</a></li><li><a href="' + medicalLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Himmelfarb\', \'Book\']);" target="_blank">Check Himmelfarb Library options</a></li>';
 	
 }
 
@@ -183,7 +183,7 @@ if (format === "DissertationFormat" || format === "Dissertation" ) { // note sur
         // Replace the final table with semantic HTML, along with the dynamic links
         // Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 
-        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '" onClick="' + gaEventLink + '" target="_blank">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '" " onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Dissertation\']);" target="_blank">Request from another local library or via Interlibary Loan (ILL)</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+        var nextstepsLink = '<li>Look for a copy nearby: <a href="' + searchURL + '" onClick="' + gaEventLink + '" target="_blank">See if the library has this dissertation</a></li><li>Not available anywhere? <a href="' + illiadLink + '" " onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Dissertation\']);" target="_blank">Request from another local library or via Interlibary Loan (ILL)</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();_gaq.push([\'_trackEvent\', \'Custom Links\', \'Report a problem\', \'Dissertation\']);" target="_blank"">Let us know!</a></li><li><a href="' + medicalLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Himmelfarb\', \'Dissertation\']);" target="_blank">Check Himmelfarb Library options</a></li>';
 
 }
 
@@ -220,7 +220,7 @@ if (format === "UnknownFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li>Find a copy nearby: <a href="http://surveyor.library.gwu.edu' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '" " onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Unknown\']);" target="_blank">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();"">Let us know!</a></li><li><a href="' + medicalLink + '">Check Himmelfarb Library options</a></li>';
+var nextstepsLink = '<li>Find a copy nearby: <a href="http://surveyor.library.gwu.edu' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '" " onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Unknown\']);" target="_blank">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();_gaq.push([\'_trackEvent\', \'Custom Links\', \'Report a problem\', \'Unknown\']);" target="_blank">Let us know!</a></li><li><a href="' + medicalLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Himmelfarb\', \'Unknown\']);" target="_blank">Check Himmelfarb Library options</a></li>';
 	
 }
 
