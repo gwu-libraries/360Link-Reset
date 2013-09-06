@@ -573,7 +573,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Not online or at GW? <a href="' + searchURL + '" onClick="' + gaEventLink + '" target="_blank">Check if another local library has this journal</a></li>' + nextstepsLink;};
 
 
-	jQuery("#360link-reset").html(scriptDiv + '<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> <div class="refworks-link"><a id="refworks" href="' + refworksLink + '">send to RefWorks</a></div></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
+	jQuery("#360link-reset").html(scriptDiv + '<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> <div class="refworks-link"><a id="refworks" href="' + refworksLink + '" onclick="_gaq.push([\'_trackEvent\',\'Refworks\',\'Send to RefWorks\']);" target="_blank">send to RefWorks</a></div></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
 
 }
 // Let's show a tooltip highlighting Document Delivery when the user has tried a few sources.
@@ -620,16 +620,19 @@ jQuery("#360link-reset ul li a").click(function() {
 	jQuery("#summon-search-box label").hide(); // Hide labels if JS is available, since placeholders will show labels for form elements
 
 
-
 	jQuery(".event-body").hide(); 
 	// Use jQuery instead of $ to avoid conflict with prototype, loaded by SS
 
 	jQuery(".event-head").click(function() {
 		jQuery(".event-body").slideToggle(400);
+	
+		//_gaq.push(['_trackEvent','Additional options','Show more full text']);
 		var current_text = jQuery(".event-head").text();
 		if(current_text === "Hide additional options") {
+		  _gaq.push(['_trackEvent','Additional options','Hide']);
 		  jQuery(".event-head").text('Show more options');
 		  } else {
+		  _gaq.push(['_trackEvent','Additional options','Show']); 
 		  jQuery(".event-head").text('Hide additional options');
 		  }
 	});
@@ -637,6 +640,8 @@ jQuery("#360link-reset ul li a").click(function() {
 	if (format === "Journal" || format === "JournalFormat") {
 	jQuery(".holding-details").tooltip({effect: 'toggle',offset:[20,70]});
 	};
+
+//final close brackets
 
 });
 
