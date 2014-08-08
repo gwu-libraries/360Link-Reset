@@ -81,8 +81,8 @@ if (format === "Journal" || format === "JournalFormat") {  // format variable se
 		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Article']);";
                 journalissn = '<span id="CitationJournalIssnValue">&nbsp;(ISSN:&nbsp;' + journalissn + ')</span>'; } // Add context to citation so if var is blank it will not display
                 else {
-                searchURL = "http://surveyor.library.gwu.edu/?q=title:" + journalTitleEncode;
-		catalogTarget = "Surveyor";
+                searchURL = "http://findit.library.gwu.edu/search?q=title:%22" + journalTitleEncode + "%22";
+		catalogTarget = "Library Catalog";
 		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Article']);";	
                 }
 	
@@ -126,8 +126,8 @@ if (format === "BookFormat" || format === "Book" ) {  //added Book -lsw
 		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Book']);";
 		bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
 		else {
-		searchURL = "http://surveyor.library.gwu.edu/?q=title:" + bookTitleLink;
-		catalogTarget = "Surveyor";
+		searchURL = "http://findit.library.gwu.edu/search?q=title:%22" + bookTitleLink + "%22";
+		catalogTarget = "Library Catalog";
 		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Book']);";	
 		} 
 	
@@ -170,8 +170,8 @@ if (format === "DissertationFormat" || format === "Dissertation" ) { // note sur
 		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Dissertation']);";	
                 bookisbn = '&nbsp;<span id="CitationDissertationISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
                 else {
-                searchURL = "http://surveyor.library.gwu.edu/?q=" + bookTitleLink;
-		catalogTarget = "Surveyor";
+                searchURL = "http://findit.library.gwu.edu/search?q=title:%22" + bookTitleLink + "%22";
+		catalogTarget = "Library Catalog";
 		gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Dissertation'])";	
                 }
 
@@ -206,8 +206,8 @@ if (format === "UnknownFormat") {
                 gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Unknown']);";
                 bookisbn = '&nbsp;<span id="CitationBookISBNValue">(ISBN:&nbsp;' + bookisbn + ')</span>&nbsp;'; } // Add context to citation so if var is blank it will not display
                 else {
-                searchURL = "http://surveyor.library.gwu.edu/?q=title:" + bookTitleLink;
-                catalogTarget = "Surveyor";
+                searchURL = "http://findit.library.gwu.edu/search?q=title:%22" + bookTitleLink + "%22";
+                catalogTarget = "Library Catalog";
                 gaEventLink = "_gaq.push(['_trackEvent','Custom Links','" + catalogTarget + "','Unknown']);";
  		}	
 	// Ok, let's get rid of that table and replace it with a semantic div for our citation
@@ -220,7 +220,7 @@ if (format === "UnknownFormat") {
 	// Remove the line above and uncomment the line below to add items to the bottom of your link resolver
 var bookTitleLink = encodeURI(bookTitle); // Encode the white space in the URL
 
-var nextstepsLink = '<li>Find a copy nearby: <a href="http://surveyor.library.gwu.edu' + bookTitleLink + '">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '" " onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Unknown\']);" target="_blank">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();_gaq.push([\'_trackEvent\', \'Custom Links\', \'Report a problem\', \'Unknown\']);">Let us know!</a></li><li><a href="' + medicalLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Himmelfarb\', \'Unknown\']);" target="_blank">Check Himmelfarb Library options</a></li>';
+var nextstepsLink = '<li>Find a copy nearby: <a href="http://findit.library.gwu.edu/search?q=title:%22' + bookTitleLink + '%22">See if the library has this</a></li><li>Not available anywhere? <a href="' + illiadLink + '" " onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Interlibrary Loan\', \'Unknown\']);" target="_blank">Request a copy from another library</a></li><li>Found a problem? <a href="javascript:void(0);" onclick="formFeedback();_gaq.push([\'_trackEvent\', \'Custom Links\', \'Report a problem\', \'Unknown\']);">Let us know!</a></li><li><a href="' + medicalLink + '" onClick="_gaq.push([\'_trackEvent\', \'Custom Links\', \'Himmelfarb\', \'Unknown\']);" target="_blank">Check Himmelfarb Library options</a></li>';
 	
 }
 
