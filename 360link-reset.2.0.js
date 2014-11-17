@@ -268,7 +268,8 @@ jQuery("table#JournalLinkTable").find("tr").each(function(index) { // Grab value
 		// Get the database name
 		
 		var newDBName = jQuery(this).find("#DatabaseCL").text();
-		
+	
+		newDBName = newDBName.replace(/and\s$/,"");	
 		DatabaseNamedata = DatabaseNamedata + newDBName + "|||";
 		
 		// Get the database link
