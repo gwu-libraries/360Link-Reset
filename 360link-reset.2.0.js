@@ -335,6 +335,7 @@ jQuery("table#BookLinkTable").find("tr").each(function(index) { // Grab values f
 
                 var newDBName = jQuery(this).find("#DatabaseCL").text();
 
+		newDBName = newDBName.replace(/and\s$/,"");
                 DatabaseNamedata = DatabaseNamedata + newDBName + "|||";
 
                 // Get the database link
