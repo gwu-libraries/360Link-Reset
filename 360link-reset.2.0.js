@@ -575,7 +575,7 @@ if(pairvalues[0] !== "?SS_Page=refiner") { // Don't rewrite the page if this is 
 	if (hasPrint != true && (format === "Journal" || format === "JournalFormat")) {nextstepsLink = '<li class="appeasement">Not online or at GW? <a href="' + searchURL + '" onClick="' + gaEventLink + '" target="_blank">Check if another local library has this journal</a></li>' + nextstepsLink;};
 
 
-	jQuery("#360link-reset").html(scriptDiv + '<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="http://gwdroid.wrlc.org/gwlibraries/360link/pencil.png" alt="Edit this Citation" /></a> <div class="refworks-link"><a id="refworks" href="' + refworksLink + '" onclick="ga(\'send\',\'event\',\'Refworks\',\'Send to RefWorks\');" target="_blank">send to RefWorks</a></div></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
+	jQuery("#360link-reset").html(scriptDiv + '<div id="page-content"><h2 style="text-align:left;">You are looking for:</h2><div id="citation">' + citationDiv + '&nbsp;<a href="' + refinerlink + '"><img src="https://assets.library.gwu.edu/app-assets/360Link-Reset/pencil.png" alt="Edit this Citation" /></a> <div class="refworks-link"><a id="refworks" href="' + refworksLink + '" onclick="ga(\'send\',\'event\',\'Refworks\',\'Send to RefWorks\');" target="_blank">send to RefWorks</a></div></div>' + Resultdiv + '<div id="next-step"><ul>' + nextstepsLink + '</ul></div><div class="clear"></div><!-- Begin Custom GWU Footer code --></div>');
 
 }
 // Let's show a tooltip highlighting Document Delivery when the user has tried a few sources.
